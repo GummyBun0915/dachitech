@@ -19,11 +19,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "astro": "^7.3.2"
+    "astro": "^7.3.2",
+    "photoswipe": "^5.4.4"
   },
   "devDependencies": {
     "@types/node": "^22.20.3",
     "dotenv": "^16.4.5",
+    "sharp": "^0.35.5",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "xlsx": "^0.18.5"

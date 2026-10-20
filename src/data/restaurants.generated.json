@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T07:30:12.255Z",
+  "generatedAt": "2026-10-20T09:53:15.747Z",
   "policyVersion": "2026-09-16",
   "recentWindowDays": 120,
   "source": "food-sheet",
@@ -71,7 +71,7 @@
       "recommendationLevel": "wubiChi",
       "visitedAt": "2026-05-29",
       "visitedAtPrecision": "day",
-      "inRecent": true,
+      "inRecent": false,
       "multiShop": false,
       "amapQuery": "%E7%99%BD%E5%B1%B1%E7%83%A4%E8%82%89%20%E6%B7%B1%E5%9C%B3%20%E5%8D%97%E5%B1%B1%E5%BA%97",
       "lng": 113.923755,
@@ -82,7 +82,7 @@
       "avgPrice": 120,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -114,7 +114,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -151,7 +151,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "太平路后岗涌66号（光明路口）",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -182,7 +182,7 @@
       "recommendationLevel": "yingChiBang",
       "visitedAt": "2026-05-21",
       "visitedAtPrecision": "day",
-      "inRecent": true,
+      "inRecent": false,
       "multiShop": false,
       "amapQuery": "%E5%AE%BE%E5%AE%BE%E7%9A%84%E9%9D%A2%E5%8C%85%E6%88%BF%20%E6%B7%B1%E5%9C%B3",
       "lng": 113.854696,
@@ -193,7 +193,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "碧海富通城三期",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -225,7 +225,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "岐关西路81号幸福天地名苑2幢29-30卡",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -257,7 +257,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "沙溪镇隆都路61号",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -287,7 +287,7 @@
       "recommendationLevel": "yingChiBang",
       "visitedAt": "2026-05-31",
       "visitedAtPrecision": "day",
-      "inRecent": true,
+      "inRecent": false,
       "multiShop": false,
       "amapQuery": "%E5%A4%A9%E5%A4%A9%E5%A4%A9%E5%A6%87%E7%BD%97%20%E6%B7%B1%E5%9C%B3%20%E6%B7%B1%E5%9C%B3%E6%B9%BE%E4%B8%87%E8%B1%A1%E5%9F%8E",
       "lng": 113.942453,
@@ -298,7 +298,7 @@
       "avgPrice": 98,
       "branches": [],
       "address": "科苑南路深圳湾万象城二期D区B1-0721A",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -335,7 +335,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "柏苑新村明珠坊",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -362,7 +362,7 @@
       "recommendationLevel": "keyiChi",
       "visitedAt": "2026-06-22",
       "visitedAtPrecision": "day",
-      "inRecent": true,
+      "inRecent": false,
       "multiShop": true,
       "amapQuery": "%E5%A4%A7%E9%98%AA%E7%83%A7%E8%82%89%20%E6%B7%B1%E5%9C%B3%20BAKA%E4%B8%80%E4%BB%A3%EF%BC%88%E8%B4%AD%E7%89%A9%E5%85%AC%E5%9B%AD%EF%BC%89",
       "lng": 114.05333,
@@ -396,7 +396,7 @@
         }
       ],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -431,7 +431,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -476,7 +476,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -510,7 +510,7 @@
       "recommendationLevel": "keyiChi",
       "visitedAt": "2026-05-26",
       "visitedAtPrecision": "day",
-      "inRecent": true,
+      "inRecent": false,
       "multiShop": false,
       "amapQuery": "%E8%91%A3%E8%80%81%E5%A4%AA%E5%A9%86%E8%B9%84%E8%8A%B1%20%E6%B7%B1%E5%9C%B3%20%E6%B5%B7%E5%B2%B8%E5%9F%8E",
       "lng": 113.93821,
@@ -521,7 +521,7 @@
       "avgPrice": 70,
       "branches": [],
       "address": "海德三道海岸城东座1层121号",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -562,7 +562,7 @@
       "avgPrice": 100,
       "branches": [],
       "address": "兴华二路62-2号",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -603,7 +603,7 @@
       "avgPrice": 120,
       "branches": [],
       "address": "海德一道1218号深圳湾未来广场B栋CL120",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -640,7 +640,7 @@
       "avgPrice": 100,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -715,7 +715,7 @@
         }
       ],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -760,7 +760,7 @@
       "avgPrice": 22,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -801,7 +801,7 @@
       "avgPrice": 100,
       "branches": [],
       "address": "锦绣北街8号东部工业区F栋105A（华侨城）",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -834,7 +834,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -871,7 +871,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -908,7 +908,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -945,7 +945,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -977,7 +977,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "华润万象天地大象广场LG层",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1014,7 +1014,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1051,7 +1051,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1088,7 +1088,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1120,7 +1120,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1157,7 +1157,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "文心六路4号保利文化广场C区Kaledo L3-08",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1194,7 +1194,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "南头街道田厦社区桃夏一街3号",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1231,7 +1231,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "深业上城3楼小镇南区T3081",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1268,7 +1268,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1300,7 +1300,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1332,7 +1332,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1369,7 +1369,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1406,7 +1406,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1443,7 +1443,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1480,7 +1480,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1517,7 +1517,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1554,7 +1554,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1587,7 +1587,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1624,7 +1624,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1661,7 +1661,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1693,7 +1693,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1730,7 +1730,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1767,7 +1767,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1804,7 +1804,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1836,7 +1836,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1873,7 +1873,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1910,7 +1910,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1942,7 +1942,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -1974,7 +1974,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2006,7 +2006,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2043,7 +2043,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "泰然四路95号（车公庙）",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2075,7 +2075,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2112,7 +2112,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "科发路19号华润城万象天地L5层SL516",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2144,7 +2144,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2176,7 +2176,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2217,7 +2217,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2254,7 +2254,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2286,7 +2286,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2323,7 +2323,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2360,7 +2360,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2397,7 +2397,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     },
     {
@@ -2434,7 +2434,7 @@
       "avgPrice": null,
       "branches": [],
       "address": "",
-      "contentUpdatedAt": "2026-09-17",
+      "contentUpdatedAt": "2026-10-20",
       "coverImage": null
     }
   ]

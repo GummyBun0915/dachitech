@@ -18,7 +18,9 @@ export interface PubRestaurant {
   address: string;           // 单店地址，选填
   branches: PubBranch[];     // 同品牌多门店；单店为空数组
   contentUpdatedAt: string; coverImage: string | null;
+  images: PubImage[];        // 实拍图（第 1 张为封面）；路径不含 base
 }
+export interface PubImage { src: string; thumb: string; w: number; h: number }
 export interface PubBranch {
   id: string; name: string; address: string;
   lng: number | null; lat: number | null;
@@ -105,6 +107,8 @@ export function lastUpdated(list = restaurants): string | null {
 // base 感知的目录式路由（部署在 /dachitech/ 子路径；BASE_URL 由 astro.config.base 注入，带尾斜杠）
 const BASE = import.meta.env.BASE_URL;
 export const homePath = BASE;
+/** 图片路径加 base（数据里存不带 base 的相对路径） */
+export const asset = (p: string) => `${BASE}${p}`;
 export function detailPath(r: PubRestaurant) {
   return `${BASE}${r.regionSlug}/${encodeURIComponent(r.slug)}/`;
 }
