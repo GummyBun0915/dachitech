@@ -61,10 +61,10 @@ export async function createAmap(el: HTMLElement, key: string, security: string,
       if (!pts.length) return;
       const lngs = pts.map((p) => p[0]), lats = pts.map((p) => p[1]);
       const b = new AMap.Bounds([Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]);
-      map.setBounds(b, false, [50, 50, 50, 50]);
+      map.setBounds(b, true, [50, 50, 50, 50]); // 立即生效：动画中的取景会和随后的定位互相覆盖
       if (map.getZoom() > 16) map.setZoom(16);
     },
-    setView(at, z) { map.setZoomAndCenter(Math.max(map.getZoom(), z), at); },
+    setView(at, z) { map.setZoomAndCenter(Math.max(map.getZoom(), z), at, true); },
     project(at) { const p = map.lngLatToContainer(at); return { x: p.getX(), y: p.getY() }; },
     contains(at) { return map.getBounds().contains(at); },
     popup(at, node) {

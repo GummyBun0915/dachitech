@@ -165,7 +165,7 @@ function init(root: HTMLElement) {
         m.on("moveend", () => { if (f.bounds) apply(); });
         m.on("click", () => { activeId = null; rows.forEach((el) => el.classList.remove("is-on")); m.closePopup(); draw(); });
         if (me) m.me(me);
-        fitMain(); draw();
+        fitMain(); draw(); // 若由点行触发，随后的 select 会把视野移到该店
         return m;
       })
       .catch(() => {
@@ -247,7 +247,7 @@ function init(root: HTMLElement) {
       if ((e.target as HTMLElement).closest("a, button")) return;
       const rec = byId.get(el.dataset.id!);
       if (!rec?.pts.length) return;
-      if (mobile()) setView(true);
+      if (mobile()) setView(true, true);
       const m = await ensureMap(); if (!m) return;
       if (mobile()) m.resize();
       select(el.dataset.id!, "list");
@@ -258,12 +258,12 @@ function init(root: HTMLElement) {
   });
 
   // 手机：列表 ↔ 全屏地图
-  function setView(map: boolean) {
+  function setView(map: boolean, fromRow = false) {
     root.classList.toggle("show-map", map);
     fab.textContent = map ? "列表" : "地图";
     fab.setAttribute("aria-pressed", String(map));
     writeUrl();
-    if (map) ensureMap().then((m) => { if (m) { m.resize(); if (!activeId) fitMain(); } });
+    if (map) ensureMap().then((m) => { if (m) { m.resize(); if (!fromRow && !activeId) fitMain(); } });
   }
   fab.addEventListener("click", () => setView(!root.classList.contains("show-map")));
 
