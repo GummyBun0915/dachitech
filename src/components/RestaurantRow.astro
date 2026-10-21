@@ -5,7 +5,7 @@
  * 行本身可点 → 地图定位（由 city.ts 处理）；链接与按钮各管各的。
  */
 import GuideBadge from "./GuideBadge.astro";
-import { fmtPrice, fmtVisited, detailPath, navUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
+import { fmtPrice, fmtVisited, detailPath, navUrl, branchNavUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf } from "../lib/cuisine";
 interface Props { r: PubRestaurant; i: number }
 const { r, i } = Astro.props;
@@ -36,15 +36,39 @@ const hay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.cui
     {(r.reviewText || r.dishes.length > 0) && (
       <p class="it-sub">{r.reviewText || `推荐 ${r.dishes.slice(0, 3).map((d) => d.name).join("、")}`}</p>
     )}
+    {multi && (
+      /* 多门店：直接列出门店，点哪家地图就定位哪家（city.ts）；关店门店置灰 */
+      <p class="it-brs" aria-label={`${r.branches.length} 家门店`}>
+        {r.branches.map((b) => (
+          <button type="button" class:list={["it-br", { "it-br--closed": b.closed, "it-br--nopos": b.lng === null }]}
+            data-branch={b.name} title={b.lng === null ? "这家门店还没有坐标" : `在地图上看 ${b.name}`}>{b.name || r.brand}{b.closed && "（已关）"}</button>
+        ))}
+      </p>
+    )}
     <p class="it-foot">
-      {multi && <span>{r.branches.length} 家门店</span>}
       {visited && <span class="num">{visited}</span>}
       <span class="it-dist num" data-dist></span>
     </p>
   </div>
-  <a class="it-nav" href={navUrl(r)} target="_blank" rel="noopener noreferrer" aria-label={`在${navProvider(r)}打开${r.brand}`}>
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-  </a>
+  {multi ? (
+    /* 多门店导航：点开选门店，每家独立跳转 */
+    <details class="it-navwrap">
+      <summary class="it-nav" aria-label={`选择 ${r.brand} 的门店导航`}>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span class="it-nav-n num">{r.branches.length}</span>
+      </summary>
+      <ul class="it-menu">
+        <li class="it-menu-h">导航到哪家？</li>
+        {r.branches.map((b) => (
+          <li><a href={branchNavUrl(r, b)} target="_blank" rel="noopener noreferrer"><span>{b.name || r.brand}{b.closed && <em>已关店</em>}</span>{b.address && <small>{b.address}</small>}</a></li>
+        ))}
+      </ul>
+    </details>
+  ) : (
+    <a class="it-nav" href={navUrl(r)} target="_blank" rel="noopener noreferrer" aria-label={`在${navProvider(r)}打开${r.brand}`}>
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    </a>
+  )}
 </li>
 
 <style>
@@ -66,6 +90,22 @@ const hay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.cui
   .it-sub { font-size: 12.5px; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .it-foot { display: flex; gap: 8px; font-size: 11.5px; color: var(--ink-3); }
   .it-dist:empty { display: none; }
+  .it-brs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+  .it-br { height: 24px; padding: 0 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); font-size: 12px; color: var(--ink); cursor: pointer; }
+  .it-br:hover { border-color: var(--op); color: var(--op); }
+  :global(.it-br.is-on) { background: var(--op); border-color: var(--op); color: #fff; }
+  .it-br--closed { color: var(--ink-3); text-decoration: line-through; }
+  .it-br--nopos { border-style: dashed; color: var(--ink-2); }
+  .it-navwrap { position: relative; align-self: center; }
+  .it-navwrap > summary { list-style: none; cursor: pointer; position: relative; }
+  .it-navwrap > summary::-webkit-details-marker { display: none; }
+  .it-nav-n { position: absolute; right: -4px; top: -4px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--ink); color: #fff; font-size: 10px; line-height: 16px; text-align: center; }
+  .it-menu { position: absolute; right: 0; top: 42px; z-index: 30; width: 230px; margin: 0; padding: 6px; list-style: none; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-overlay); box-shadow: 0 8px 24px rgba(18, 18, 22, 0.16); }
+  .it-menu-h { padding: 4px 8px 6px; font-size: 12px; color: var(--ink-3); }
+  .it-menu a { display: grid; gap: 1px; padding: 8px; border-radius: 6px; color: var(--ink); font-size: 14px; font-weight: 600; }
+  .it-menu a:hover { background: var(--op-soft); text-decoration: none; }
+  .it-menu small { font-size: 11.5px; font-weight: 400; color: var(--ink-2); }
+  .it-menu em { font-style: normal; font-weight: 500; font-size: 11px; color: var(--ink-3); margin-left: 6px; }
   .it-nav { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); align-self: center; }
   .it-nav:hover { border-color: var(--op); color: var(--op); text-decoration: none; }
   .it--closed { opacity: 0.6; }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T06:08:24.426Z",
+  "generatedAt": "2026-10-21T06:13:55.925Z",
   "policyVersion": "2026-09-16",
   "recentWindowDays": 120,
   "source": "food-sheet",
@@ -650,7 +650,7 @@
       "coverImage": "images/r/r_77d9fb73/cover.webp"
     },
     {
-      "id": "r_c2900e2e",
+      "id": "r_01c8ab1f",
       "slug": "寿司郎",
       "regionSlug": "shenzhen",
       "actualCity": "深圳",
@@ -722,8 +722,72 @@
       ],
       "address": "",
       "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
+      "images": [
+        {
+          "src": "images/r/r_01c8ab1f/cover.webp",
+          "thumb": "images/r/r_01c8ab1f/cover-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p2.webp",
+          "thumb": "images/r/r_01c8ab1f/p2-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p3.webp",
+          "thumb": "images/r/r_01c8ab1f/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p4.webp",
+          "thumb": "images/r/r_01c8ab1f/p4-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p5.webp",
+          "thumb": "images/r/r_01c8ab1f/p5-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p6.webp",
+          "thumb": "images/r/r_01c8ab1f/p6-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p7.webp",
+          "thumb": "images/r/r_01c8ab1f/p7-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p8.webp",
+          "thumb": "images/r/r_01c8ab1f/p8-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01c8ab1f/p9.webp",
+          "thumb": "images/r/r_01c8ab1f/p9-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_01c8ab1f/cover.webp"
     },
     {
       "id": "r_5f30f5e8",

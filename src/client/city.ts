@@ -123,7 +123,10 @@ function init(root: HTMLElement) {
       rows.forEach((el) => {
         const d = distOf(el.dataset.id!);
         const out = el.querySelector<HTMLElement>("[data-dist]");
-        if (out) out.textContent = Number.isFinite(d) ? (d < 1000 ? `${Math.round(d)}m` : `${(d / 1000).toFixed(1)}km`) : "";
+        const rec = byId.get(el.dataset.id!)!;
+        const near = rec.pts.length > 1 ? rec.pts.slice().sort((a, b) => meter(me!, [a[0], a[1]]) - meter(me!, [b[0], b[1]]))[0] : null;
+        const km = d < 1000 ? `${Math.round(d)}m` : `${(d / 1000).toFixed(1)}km`;
+        if (out) out.textContent = Number.isFinite(d) ? (near ? `最近：${near[2]} ${km}` : km) : "";
       });
       api?.me(me);
       then?.();
@@ -262,6 +265,7 @@ function init(root: HTMLElement) {
     highlight(id);
     if (!api || !p) return;
     if (from === "list") api.setView([p[0], p[1]], 15);
+    rowById.get(id)?.querySelectorAll<HTMLElement>(".it-br").forEach((b) => b.classList.toggle("is-on", rec!.pts.length > 1 && b.dataset.branch === p[2]));
     api.popup([p[0], p[1]], popupEl(id, p));
     if (from === "map" && !mobile()) rowById.get(id)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
@@ -269,7 +273,7 @@ function init(root: HTMLElement) {
   // 行 → 地图（点行空白处；链接 / 看图按钮各管各的）
   rows.forEach((el) => {
     el.addEventListener("click", async (e) => {
-      if ((e.target as HTMLElement).closest("a, button")) return;
+      if ((e.target as HTMLElement).closest("a, button, summary, details")) return;
       const rec = byId.get(el.dataset.id!);
       if (!rec?.pts.length) return;
       if (mobile()) setView(true, true);
@@ -277,7 +281,17 @@ function init(root: HTMLElement) {
       if (mobile()) m.resize();
       select(el.dataset.id!, "list");
     });
-    if (hoverable) el.addEventListener("mouseenter", () => {
+    // 多门店：点门店名 → 定位到那家门店
+    el.querySelectorAll<HTMLButtonElement>(".it-br").forEach((btn) => btn.addEventListener("click", async () => {
+      const rec = byId.get(el.dataset.id!); const pt = rec?.pts.find((p) => p[2] === btn.dataset.branch);
+      if (!pt) { btn.title = "这家门店还没有坐标"; return; }
+      el.querySelectorAll(".it-br").forEach((b) => b.classList.toggle("is-on", b === btn));
+      if (mobile()) setView(true, true);
+      const m = await ensureMap(); if (!m) return;
+      if (mobile()) m.resize();
+      select(el.dataset.id!, "list", pt);
+    }));
+        if (hoverable) el.addEventListener("mouseenter", () => {
       if (api && byId.get(el.dataset.id!)?.pts.length) highlight(el.dataset.id!);
     });
   });
@@ -303,6 +317,11 @@ function init(root: HTMLElement) {
   root.querySelector<HTMLInputElement>("[data-bounds]")?.addEventListener("change", (e) => {
     f.bounds = (e.target as HTMLInputElement).checked; apply();
   });
+
+  // 多门店导航菜单：同时只开一个，点外面关闭
+  const menus = [...root.querySelectorAll<HTMLDetailsElement>(".it-navwrap")];
+  menus.forEach((d) => d.addEventListener("toggle", () => { if (d.open) menus.forEach((o) => o !== d && (o.open = false)); }));
+  document.addEventListener("click", (e) => { if (!(e.target as HTMLElement).closest(".it-navwrap")) menus.forEach((d) => (d.open = false)); });
 
   apply();
   // PC 地图常驻 → 立即加载；手机只在打开地图时加载（省流量）
