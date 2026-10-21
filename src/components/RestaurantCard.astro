@@ -1,12 +1,15 @@
 ---
-import { fmtScore, fmtVisited, fmtPrice, LEVEL_LABEL, detailPath, navUrl, branchNavUrl, navProvider, type PubRestaurant } from "../lib/food-data";
+import { fmtScore, fmtVisited, fmtPrice, LEVEL_LABEL, detailPath, navUrl, branchNavUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf } from "../lib/cuisine";
-interface Props { r: PubRestaurant }
-const { r } = Astro.props;
+/** variant：album = A 滑动相册（首页）；strip = B 封面 + 缩略条（城市页）。用户 2026-10-20 拍板 */
+interface Props { r: PubRestaurant; variant?: "album" | "strip" }
+const { r, variant = "strip" } = Astro.props;
 const score = fmtScore(r.score10);
 const visited = fmtVisited(r);
 const price = fmtPrice(r);
 const multi = r.branches.length > 1;
+const imgs = r.images;
+const n = imgs.length;
 // 客户端筛选/搜索用（纯 DOM；haystack 已小写化便于 substring 命中）
 const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.dishes.map((d) => d.name), ...r.cuisineTags]
   .join(" ").toLowerCase();
@@ -22,12 +25,49 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
   data-lng={!multi ? (r.lng ?? undefined) : undefined}
   data-lat={!multi ? (r.lat ?? undefined) : undefined}
 >
-  {/* 图片区 4:3：无图显示真实文字占位，不用示例图伪装实拍 */}
-  <a class="rc-media" href={detailPath(r)} tabindex="-1" aria-hidden="true">
-    {r.coverImage
-      ? <img src={r.coverImage} alt={`${r.brand}实拍`} loading="lazy" />
-      : <div class="rc-nophoto"><span>暂无照片</span></div>}
-  </a>
+  {/* 图片区：封面 4:3 + 下方 3 张小图（多出的显示 +N）；点任意一张开灯箱看高清。无图显示真实文字占位 */}
+  {n > 0 && variant === "album" ? (
+    <div class="rc-media rc-album" data-gallery={galleryData(r)} data-album>
+      <div class="rc-track">
+        {imgs.map((im, i) => (
+          <button type="button" class="rc-slide" data-shot={i} aria-label={`查看大图：${r.brand} 第 ${i + 1} / ${n} 张`}>
+            <img src={asset(im.thumb)} srcset={`${asset(im.thumb)} 400w, ${asset(im.src)} 1600w`}
+              sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+              width={im.w} height={im.h} alt={i === 0 ? `${r.brand}实拍` : ""} loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+      {n > 1 && <>
+        <span class="rc-count num" aria-hidden="true"><b data-album-i>1</b> / {n}</span>
+        <button type="button" class="rc-arrow rc-arrow--prev" data-album-step="-1" aria-label="上一张" hidden>‹</button>
+        <button type="button" class="rc-arrow rc-arrow--next" data-album-step="1" aria-label="下一张">›</button>
+      </>}
+    </div>
+  ) : n > 0 ? (
+    <div class="rc-media rc-gal" data-gallery={galleryData(r)}>
+      <button type="button" class="rc-cover" data-shot="0" aria-label={`查看大图：${r.brand}，共 ${n} 张`}>
+        <img src={asset(imgs[0].thumb)} srcset={`${asset(imgs[0].thumb)} 400w, ${asset(imgs[0].src)} 1600w`}
+          sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw"
+          width={imgs[0].w} height={imgs[0].h} alt={`${r.brand}实拍`} loading="lazy" decoding="async" />
+        {n > 1 && n < 4 && <span class="rc-count num" aria-hidden="true">1 / {n}</span>}
+      </button>
+      {/* 缩略条只在 ≥4 张时出现（固定 3 格方图）；2–3 张只放封面 + 张数角标，避免宽条硬裁（用户 2026-10-20） */}
+      {n >= 4 && (
+        <div class="rc-strip">
+          {imgs.slice(1, 4).map((im, i) => (
+            <button type="button" class="rc-shot" data-shot={i + 1} aria-label={`查看大图：${r.brand} 第 ${i + 2} 张`}>
+              <img src={asset(im.thumb)} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
+              {i === 2 && n > 4 && <span class="rc-more num" aria-hidden="true">+{n - 4}</span>}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  ) : (
+    <a class="rc-media" href={detailPath(r)} tabindex="-1" aria-hidden="true">
+      <div class="rc-nophoto"><span>暂无照片</span></div>
+    </a>
+  )}
   <div class="rc-body">
     <div class="rc-top">
       <h3 class="rc-name">
@@ -99,7 +139,33 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
   .rc--closed { opacity: 0.66; background: var(--paper-2); }
   .rc--closed .rc-media { filter: grayscale(1); }
   .rc--closed .rc-name a { color: var(--ink-2); }
-  .rc-media { display: block; aspect-ratio: 4 / 3; background: var(--paper-2); }
+  .rc-media { display: block; background: var(--paper-2); }
+  /* A 版：滑动相册。原生 scroll-snap（手机手势零成本），PC 悬停出 ‹ › */
+  .rc-album { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+  .rc-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .rc-track::-webkit-scrollbar { display: none; }
+  .rc-slide { flex: 0 0 100%; height: 100%; padding: 0; border: 0; background: var(--paper-2); scroll-snap-align: start; cursor: zoom-in; }
+  .rc-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rc-album .rc-count b { font-weight: 700; }
+  .rc-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92); color: var(--ink); font-size: 1.25rem; line-height: 1; display: grid; place-items: center;
+    box-shadow: 0 1px 4px rgba(18, 18, 22, 0.18); opacity: 0; transition: opacity var(--t);
+  }
+  .rc-arrow--prev { left: 8px; } .rc-arrow--next { right: 8px; }
+  .rc-arrow[hidden] { display: none; }
+  @media (hover: hover) and (pointer: fine) { .rc-album:hover .rc-arrow, .rc-arrow:focus-visible { opacity: 1; } }
+  a.rc-media { aspect-ratio: 4 / 3; }
+  /* B 版：封面 + 缩略条。按钮清掉默认样式，整块可点开灯箱 */
+  .rc-cover, .rc-shot { display: block; width: 100%; padding: 0; border: 0; background: var(--paper-2); cursor: zoom-in; position: relative; }
+  .rc-cover { aspect-ratio: 4 / 3; }
+  /* 小图 1–3 张都铺满整行，且条带高度恒为卡宽的 1/3：3 张=方块，2 张=3:2，1 张=3:1 横幅 */
+  .rc-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2px; background: var(--paper); }
+  .rc-shot { aspect-ratio: 1; }
+  .rc-count { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: var(--r-chip); background: rgba(18, 18, 22, 0.62); color: #fff; font-size: 0.75rem; font-weight: 600; }
+  .rc-cover img, .rc-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rc-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(18, 18, 22, 0.55); color: #fff; font-size: 1rem; font-weight: 700; }
+  .rc-cover:focus-visible, .rc-shot:focus-visible { outline: 2px solid var(--op); outline-offset: -2px; }
   .rc-media:hover, .rc-media:focus { text-decoration: none; }
   .rc-media img { width: 100%; height: 100%; object-fit: cover; }
   .rc-nophoto { width: 100%; height: 100%; display: grid; place-items: center; color: var(--ink-3); font-size: var(--fs-sub); }

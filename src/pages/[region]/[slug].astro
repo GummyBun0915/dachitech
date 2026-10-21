@@ -1,6 +1,6 @@
 ---
 import Layout from "../../components/Layout.astro";
-import { restaurants, regionName, fmtScore, fmtVisited, fmtPrice, navUrl, branchNavUrl, navProvider, LEVEL_LABEL, regionPath, type PubRestaurant } from "../../lib/food-data";
+import { restaurants, regionName, fmtScore, fmtVisited, fmtPrice, asset, galleryData, navUrl, branchNavUrl, navProvider, LEVEL_LABEL, regionPath, type PubRestaurant } from "../../lib/food-data";
 
 export function getStaticPaths() {
   return restaurants.map((r) => ({ params: { region: r.regionSlug, slug: r.slug }, props: { r } }));
@@ -22,9 +22,26 @@ const multi = r.branches.length > 1;
     </nav>
 
     {/* 图片：无图文字占位，不为缺图生成假食物（P5 补图后自动出现） */}
-    {r.coverImage
-      ? <div class="photo"><img src={r.coverImage} alt={`${r.brand}实拍`} /></div>
-      : <div class="photo nophoto"><span>暂无照片</span><span class="nophoto-sub">实拍图补上后会显示在这里</span></div>}
+    {r.images.length > 0 ? (
+      <div class="gallery" data-gallery={galleryData(r)}>
+        <button type="button" class="g-cover" data-shot="0" aria-label={`查看大图：${r.brand}，共 ${r.images.length} 张`}>
+          <img src={asset(r.images[0].src)} srcset={`${asset(r.images[0].thumb)} 400w, ${asset(r.images[0].src)} 1600w`}
+            sizes="(min-width: 800px) 760px, 100vw" width={r.images[0].w} height={r.images[0].h} alt={`${r.brand}实拍`} />
+        </button>
+        {r.images.length > 1 && (
+          <div class="g-grid">
+            {r.images.slice(1).map((im, i) => (
+              <button type="button" class="g-shot" data-shot={i + 1} aria-label={`查看大图：第 ${i + 2} 张`}>
+                <img src={asset(im.thumb)} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
+              </button>
+            ))}
+          </div>
+        )}
+        <p class="g-hint">共 {r.images.length} 张实拍 · 点图看高清大图</p>
+      </div>
+    ) : (
+      <div class="photo nophoto"><span>暂无照片</span><span class="nophoto-sub">实拍图补上后会显示在这里</span></div>
+    )}
 
     <header class="d-head">
       <h1 class="d-name">{r.brand}{r.branch && <span class="d-branch"> · {r.branch}</span>}</h1>
@@ -96,6 +113,15 @@ const multi = r.branches.length > 1;
   .detail { padding-top: var(--s-8); max-width: 760px; display: grid; gap: var(--s-6); }
   .crumb { font-size: var(--fs-sub); color: var(--ink-2); }
   .photo { border-radius: var(--r-image); overflow: hidden; }
+  .gallery { display: grid; gap: 4px; }
+  .g-cover, .g-shot { display: block; width: 100%; padding: 0; border: 0; background: var(--paper-2); cursor: zoom-in; overflow: hidden; }
+  .g-cover { aspect-ratio: 4 / 3; border-radius: var(--r-image); }
+  .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 4px; }
+  .g-shot { aspect-ratio: 1; border-radius: 4px; }
+  .g-cover img, .g-shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity var(--t); }
+  .g-cover:hover img, .g-shot:hover img { opacity: 0.9; }
+  .g-cover:focus-visible, .g-shot:focus-visible { outline: 2px solid var(--op); outline-offset: 2px; }
+  .g-hint { font-size: var(--fs-sub); color: var(--ink-3); margin-top: var(--s-1); }
   .nophoto {
     aspect-ratio: 4 / 3; background: var(--paper-2);
     display: grid; place-content: center; gap: var(--s-2); text-align: center;

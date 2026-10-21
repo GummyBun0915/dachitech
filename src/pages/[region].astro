@@ -1,7 +1,13 @@
 ---
+/**
+ * 城市页 · 方案 1「紧凑行」（用户 2026-10-21 选定）。
+ * 手机：行列表（一屏 ≥4 家）+ 底部「地图」按钮切全屏地图；PC：左列表、右地图常驻，悬停/点击双向联动。
+ * 地图：国内高德 JS API，海外 Leaflet + OpenStreetMap（用户规则：中国用高德、海外用 Google——导航外链走 Google，
+ * 站内底图用免 key 的 OSM）。交互逻辑见 client/city.ts。
+ */
 import Layout from "../components/Layout.astro";
-import RestaurantCard from "../components/RestaurantCard.astro";
-import { REGION_ORDER, regionName, byRegion, isEaten, fmtVisited } from "../lib/food-data";
+import RestaurantRow from "../components/RestaurantRow.astro";
+import { REGION_ORDER, regionName, byRegion, isEaten, branchNavUrl, navUrl, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf, CUISINE_GROUP_ORDER } from "../lib/cuisine";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -9,16 +15,17 @@ import { resolve } from "node:path";
 export function getStaticPaths() {
   return REGION_ORDER.map((slug) => ({ params: { region: slug } }));
 }
-const { region } = Astro.params;
+const { region } = Astro.params as { region: string };
 const name = regionName(region);
 const list = byRegion(region);
 const eatenCount = list.filter(isEaten).length;
 const waitCount = list.length - eatenCount;
-const withCoords = list.filter((r) => r.lng !== null || r.branches.some((b) => b.lng !== null)).length;
 const subLine = eatenCount > 0
-  ? `${eatenCount} 家本人实吃${waitCount > 0 ? ` · ${waitCount} 家待吃` : ""}`
-  : waitCount > 0 ? `暂无实吃 · ${waitCount} 家待吃` : "这个地区还没有记录";
+  ? `${eatenCount} 家实吃${waitCount > 0 ? ` · ${waitCount} 家待吃` : ""}`
+  : waitCount > 0 ? `暂无实吃 · ${waitCount} 家待吃` : "还没有记录";
 
+// 地图规则（用户 2026-10-20）：中国一律高德、海外不加载高德
+const overseas = ["japan", "singapore", "thailand"].includes(region);
 // 高德凭据：优先 gitignore 的本地配置，其次 CI 注入的环境变量。缺失则地图降级（不阻塞列表）。
 function amapCfg() {
   const p = resolve(process.cwd(), "data", "map-config.json");
@@ -31,157 +38,148 @@ function amapCfg() {
   const key = process.env.PUBLIC_AMAP_KEY;
   return key ? { key, security: process.env.PUBLIC_AMAP_SECURITY ?? "" } : null;
 }
-const amap = amapCfg();
+const amap = overseas ? null : amapCfg();
 
-// 筛选维度：品类归并成大类（用户 2026-09-16），按固定顺序展示
-const presentGroups = new Set(list.flatMap((r) => cuisineGroupsOf(r.cuisineTags)));
-const cuisines = CUISINE_GROUP_ORDER.filter((g) => presentGroups.has(g));
-const LEVELS = [
-  { key: "wubiChi", label: "务必吃" },
-  { key: "yingChiBang", label: "应吃榜" },
-  { key: "keyiChi", label: "可以吃" },
-  ...(waitCount > 0 ? [{ key: "daiChi", label: "待吃" }] : []),
-] as const;
+const groups = CUISINE_GROUP_ORDER.filter((g) => list.some((r) => cuisineGroupsOf(r.cuisineTags).includes(g)));
+const LEVELS = ([["wubiChi", "务必吃"], ["yingChiBang", "应吃榜"], ["keyiChi", "可以吃"], ["daiChi", "待吃"]] as const)
+  .filter(([k]) => list.some((r) => r.recommendationLevel === k));
+
+// 每家店的点位（单店 1 个；多门店每家有坐标的门店各 1 个，导航到各自门店）
+const pts = (r: PubRestaurant) => r.branches.length > 1
+  ? r.branches.filter((b) => b.lng !== null && b.lat !== null).map((b) => [b.lng, b.lat, b.name, branchNavUrl(r, b)])
+  : r.lng !== null && r.lat !== null ? [[r.lng, r.lat, r.branch ?? "", navUrl(r)]] : [];
+const mapData = list.map((r) => ({ id: r.id, level: r.closed ? "closed" : r.recommendationLevel, score: r.score10, pts: pts(r) }));
+const withCoords = mapData.filter((d) => d.pts.length).length;
+const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
 ---
-<Layout title={`${name} · 大吃特吃`} description={`${name}的本人实吃记录。`}>
-  <div class="page page-inner city-head">
-    <h1 class="display city-title">{name}</h1>
-    <p class="city-sub">{subLine}</p>
-  </div>
-
+<Layout title={name} description={`${name}的本人实吃记录：${subLine}。`}>
   {list.length === 0 ? (
-    <div class="page page-inner">
+    <div class="page page-inner empty-wrap">
+      <h1 class="display">{name}</h1>
       <div class="empty">还没有记录。吃过之后就会出现在这里。</div>
     </div>
   ) : (
-    <div class="page page-inner city-app" data-region={region}>
-      {/* 操作区：fal 操作语域——字重+发丝线，不用海报色 */}
-      <div class="controls" role="search">
-        <input class="q" type="search" placeholder="搜店名 / 菜名" aria-label="搜索店名或菜名" data-q />
-        <div class="chips" role="group" aria-label="品类筛选">
-          {cuisines.map((c) => <button class="chip" data-cat={c} aria-pressed="false">{c}</button>)}
-        </div>
-        <div class="chips" role="group" aria-label="榜单筛选">
-          {LEVELS.map((l) => <button class="chip chip--level" data-level={l.key} aria-pressed="false">{l.label}</button>)}
-        </div>
-        <div class="view-switch" role="group" aria-label="视图切换">
-          <button data-view="list" aria-pressed="true">列表</button>
-          <button data-view="map" aria-pressed="false">地图</button>
-        </div>
-        <button class="clear" data-clear hidden>清除筛选</button>
-      </div>
-
-      <p class="count-line" data-count>{list.length} 家</p>
-
-      <div class="split">
-        <section class="list" data-list aria-label="餐厅列表">
-          {list.map((r) => <RestaurantCard r={r} />)}
-          <div class="empty" data-empty hidden>没有符合筛选的店。<button class="clear-inline" data-clear>清除筛选</button></div>
-        </section>
-
-        <section class="map-col" data-mapcol aria-label="地图">
-          <div class="map-panel card" data-mappanel>
-            {/* 地图挂载点。当前 0 已验证坐标 + 高德 key 域名白名单待部署后实测（DECISIONS D1/D2）；
-                不放假坐标假地图，显示诚实待补态。补坐标后在此接入 map-adapter。 */}
-            <div class="map-fallback" data-mapfallback>
-              {withCoords > 0 && amap ? (
-                <p class="mf-sub">地图加载中…</p>
-              ) : (
-                <>
-                  <p class="mf-title">地图待补</p>
-                  <p class="mf-sub">这 {list.length} 家门店坐标还没核实。<br />先看列表，每家都能一键跳转高德搜索。</p>
-                </>
-              )}
-            </div>
+    <div class="city" data-city={region}>
+      <section class="pane-list" aria-label="餐厅列表">
+        <div class="bar" role="search">
+          <div class="bar-row">
+            <h1 class="bar-title">{name} <span class="num" data-count>{list.length}</span><span class="bar-unit"> 家</span></h1>
+            <input class="bar-q" type="search" placeholder="搜店名 / 菜" aria-label="搜索店名或菜名" data-q />
+            <select class="bar-sort" data-sort aria-label="排序">
+              <option value="score">按分数</option>
+              <option value="recent">最近吃</option>
+              <option value="dist">离我最近</option>
+            </select>
           </div>
-        </section>
-      </div>
+          <div class="chips" role="group" aria-label="筛选">
+            {LEVELS.map(([k, l]) => <button type="button" class="chip" data-f-level={k} aria-pressed="false">{l}</button>)}
+            {groups.length > 1 && <span class="chip-sep" aria-hidden="true"></span>}
+            {groups.length > 1 && groups.map((g) => <button type="button" class="chip" data-f-cat={g} aria-pressed="false">{g}</button>)}
+          </div>
+          {withCoords > 0 && <label class="bar-bounds"><input type="checkbox" data-bounds /> 只看地图范围内</label>}
+        </div>
+        <p class="sub-line">{subLine}</p>
+        <ol class="items" data-items>
+          {list.map((r, i) => <RestaurantRow r={r} i={i} />)}
+        </ol>
+        <p class="empty-note" data-empty hidden>没有符合条件的店。<button type="button" data-clear>清除筛选</button></p>
+      </section>
+
+      <section class="pane-map" aria-label="地图">
+        <div class="map" data-map></div>
+        <div class="map-msg" data-map-msg hidden></div>
+        {withCoords > 0 && <button type="button" class="map-btn map-locate" data-locate aria-label="定位到我">◎</button>}
+        {withCoords > 0 && <button type="button" class="map-btn map-reset" data-reset>查看全部</button>}
+      </section>
+
+      <button type="button" class="fab" data-fab aria-pressed="false">地图</button>
+      <script type="application/json" data-map-data set:html={JSON.stringify({ cfg: mapCfg, items: mapData })} />
     </div>
   )}
 </Layout>
 
-<style>
-  .city-head { padding-top: var(--s-12); display: grid; gap: var(--s-3); }
-  .city-title { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); }
-  .city-sub { color: var(--ink-2); font-size: var(--fs-sub); }
-  .city-app { margin-top: var(--s-8); display: grid; gap: var(--s-4); }
-  .controls { display: grid; gap: var(--s-3); padding-block: var(--s-3); border-block: 1px solid var(--line); }
-  .q {
-    width: 100%; min-height: var(--touch); padding: 0 var(--s-4);
-    border: 1px solid var(--line); border-radius: var(--r-chip); font: inherit; letter-spacing: var(--ls-text);
-  }
-  .chips { display: flex; gap: var(--s-2); overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-  .chip {
-    flex: none; min-height: 36px; padding: 0 14px; border-radius: var(--r-chip);
-    border: 1px solid var(--line); font-size: var(--fs-sub); font-weight: 550; color: var(--ink-2);
-    transition: opacity var(--t), transform var(--t);
-  }
-  .chip[aria-pressed="true"] { background: var(--op); border-color: var(--op); color: #fff; }
-  .view-switch { display: flex; border: 1px solid var(--line); border-radius: var(--r-chip); overflow: hidden; width: fit-content; }
-  .view-switch button { min-height: 36px; padding: 0 16px; font-size: var(--fs-sub); font-weight: 550; color: var(--ink-2); }
-  .view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-  .clear { justify-self: start; min-height: 36px; color: var(--op); font-size: var(--fs-sub); font-weight: 600; }
-  .clear-inline { color: var(--op); font-weight: 600; margin-left: 4px; }
-  .count-line { font-size: var(--fs-sub); color: var(--ink-2); }
-  .split { display: grid; gap: var(--s-4); }
-  .list { display: grid; gap: var(--s-4); align-content: start; }
-  .map-panel {
-    position: sticky; top: 72px;
-    height: 60dvh; min-height: 320px;
-    overflow: hidden;
-  }
-  .map-panel :global(.amap-container) { width: 100%; height: 100%; }
-  .map-fallback {
-    position: absolute; inset: 0;
-    color: var(--ink-3); font-size: var(--fs-sub); text-align: center;
-    display: grid; place-content: center; gap: var(--s-2); padding: var(--s-6);
-  }
-  .map-fallback[hidden] { display: none; }
-  .mf-title { color: var(--ink-2); font-weight: 600; }
-  .mf-sub { line-height: 1.6; }
-  .mf-retry {
-    justify-self: center; margin-top: var(--s-2); min-height: 36px; padding: 0 var(--s-4);
-    border: 1px solid var(--line); border-radius: var(--r-chip); font-weight: 600; color: var(--ink);
-  }
-  /* 地图 marker 对应卡片选中态：不只靠颜色，用左边线 + 底色 */
-  :global(.rc--active) { box-shadow: inset 3px 0 0 var(--op); }
+<script>
+  import "../client/city.ts";
+</script>
 
-  /* <768：单列，地图在列表上方（55–65dvh），视图可切换 */
-  @media (max-width: 767px) {
-    .map-col { order: -1; }
-    .map-panel { position: relative; top: 0; height: 58dvh; }
-  }
-  /* 768–1023：地图上、列表两列下 */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    .list { grid-template-columns: repeat(2, 1fr); }
-    .map-panel { height: 52dvh; position: relative; top: 0; }
-  }
-  /* ≥1024：左列表 380–440px、右地图独立滚动 */
-  @media (min-width: 1024px) {
-    .split { grid-template-columns: var(--list-col) 1fr; align-items: start; }
-    .list { max-height: calc(100dvh - 96px); overflow-y: auto; padding-right: 2px; }
-    .map-panel { height: calc(100dvh - 96px); }
-  }
-  /* 视图切换（移动）：列表视图藏地图，地图视图藏列表 */
+<style>
+  .empty-wrap { padding-top: var(--s-12); display: grid; gap: var(--s-6); }
+  .city { --hdr: 57px; }
+
+  /* ---------- 工具条（吸顶） ---------- */
+  .bar { position: sticky; top: var(--hdr); z-index: 15; background: var(--paper); padding: 10px 16px 8px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; }
+  .bar-title { flex: none; font-size: 1.0625rem; letter-spacing: var(--ls-text); white-space: nowrap; }
+  .bar-title .num { color: var(--ink-2); font-size: 0.9rem; }
+  .bar-unit { color: var(--ink-3); font-size: 0.8rem; font-weight: 500; }
+  .bar-q { flex: 1; min-width: 0; height: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: var(--r-chip); font: inherit; font-size: 15px; background: var(--paper); }
+  .bar-sort { flex: none; width: 86px; height: 36px; border: 1px solid var(--line); border-radius: var(--r-chip); background: var(--paper); font: inherit; font-size: 13px; padding: 0 6px; color: var(--ink); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 16px; font-size: 13px; font-weight: 550; color: var(--ink-2); background: var(--paper); }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .chip-sep { flex: 0 0 1px; background: var(--line); margin: 4px 2px; }
+  .bar-bounds { display: none; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); }
+  .sub-line { padding: 8px 16px 0; font-size: 12px; color: var(--ink-3); }
+  .items { list-style: none; margin: 0; padding: 0 0 96px; }
+  .empty-note { padding: 32px 16px; text-align: center; color: var(--ink-2); font-size: 14px; }
+  .empty-note button { color: var(--op); font-weight: 600; }
+
+  /* ---------- 地图 ---------- */
+  .pane-map { position: relative; background: var(--paper-2); }
+  .map { position: absolute; inset: 0; }
+  .map-msg { position: absolute; inset: 0; display: grid; place-content: center; gap: 8px; padding: 24px; text-align: center; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+  .map-msg[hidden] { display: none; }
+  .map-btn { position: absolute; z-index: 500; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 4px rgba(18, 18, 22, 0.15); color: var(--ink); }
+  .map-locate { right: 12px; bottom: 24px; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; }
+  .map-reset { left: 12px; top: 12px; height: 34px; padding: 0 12px; border-radius: var(--r-chip); font-size: 13px; font-weight: 600; }
+
+  /* ---------- 手机 / 平板：列表为主，FAB 切全屏地图 ---------- */
   @media (max-width: 1023px) {
-    .city-app[data-view="list"] .map-col { display: none; }
-    .city-app[data-view="map"] .list { display: none; }
+    .pane-map { display: none; position: fixed; inset: var(--hdr) 0 0 0; z-index: 30; }
+    .city.show-map .pane-map { display: block; }
+    .fab {
+      position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 40;
+      height: 44px; padding: 0 24px; border-radius: 22px; background: var(--ink); color: var(--paper); font-weight: 650;
+      box-shadow: 0 4px 14px rgba(18, 18, 22, 0.3);
+    }
+    .map-locate { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .items { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0; }
+  }
+
+  /* ---------- PC：左列表右地图，各自滚动 ---------- */
+  @media (min-width: 1024px) {
+    .city { display: grid; grid-template-columns: minmax(420px, 500px) 1fr; height: calc(100dvh - var(--hdr)); }
+    .pane-list { overflow-y: auto; border-right: 1px solid var(--line); }
+    .bar { top: 0; }
+    .bar-bounds { display: flex; }
+    .items { padding-bottom: 24px; }
+    .fab { display: none; }
+    :global(.site-footer) { display: none; }
   }
 </style>
 
-<script>
-  // P3：筛选 / 搜索 / 视图切换 / URL 状态 / 滚动恢复
-  import "../client/city-browser.ts";
-</script>
-
-{withCoords > 0 && amap && (
-  <>
-    <script is:inline define:vars={{ amap }}>
-      window.__AMAP = { key: amap.key, security: amap.security };
-    </script>
-    <script>
-      // P3：高德站内地图（marker↔card 双向联动，仅渲染已验证坐标）
-      import "../client/map-adapter.ts";
-    </script>
-  </>
-)}
+<style is:global>
+  /* 地图 pin / 聚合 / 信息窗：在地图容器内，需全局作用域（高德与 Leaflet 共用） */
+  .pin { display: grid; place-items: center; min-width: 30px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink-2); font: 700 11px/1 var(--font-mono); box-shadow: 0 1px 3px rgba(18, 18, 22, 0.25); transform: translate(-50%, -50%); white-space: nowrap; cursor: pointer; transition: transform var(--t); }
+  .pin--wubiChi { background: var(--level-wubi); border-color: var(--level-wubi); color: #fff; }
+  .pin--yingChiBang { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .pin--daiChi { background: #fbf1e2; border-color: #d98a1f; color: #9a5a12; }
+  .pin--closed { background: var(--paper-2); border-color: var(--line); color: var(--ink-3); }
+  .pin.is-on { transform: translate(-50%, -50%) scale(1.3); outline: 3px solid var(--op); }
+  .pin-wrap { background: none; border: 0; }
+  .cluster { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--op); color: #fff; font: 700 13px/1 var(--font-mono); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(18, 18, 22, 0.3); transform: translate(-50%, -50%); cursor: pointer; }
+  .map-pop { position: relative; padding: 10px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-overlay); box-shadow: 0 6px 20px rgba(18, 18, 22, 0.16); font-family: var(--font-sans); }
+  .leaflet-popup-content-wrapper { border-radius: var(--r-overlay); }
+  .leaflet-popup-content { margin: 10px 12px; font-family: var(--font-sans); }
+  .pop { display: grid; grid-template-columns: 64px 1fr; gap: 10px; min-width: 220px; max-width: 260px; }
+  .pop-img { width: 64px; height: 64px; object-fit: cover; border-radius: 6px; background: var(--paper-2); }
+  .pop b { display: block; font-size: 14px; line-height: 1.3; color: var(--ink); }
+  .pop-line { display: block; margin-top: 2px; font-size: 12px; color: var(--ink-2); }
+  .pop-act { display: flex; gap: 6px; margin-top: 8px; }
+  .pop-act a { flex: 1; text-align: center; height: 30px; line-height: 30px; border-radius: var(--r-chip); font-size: 12px; font-weight: 600; text-decoration: none; }
+  .pop-nav { background: var(--ink); color: var(--paper) !important; }
+  .pop-detail { border: 1px solid var(--line); color: var(--ink) !important; }
+</style>

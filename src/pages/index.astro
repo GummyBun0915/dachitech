@@ -37,21 +37,21 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   {recentEats.length > 0 && (
     <section class="page page-inner block">
       <h2 class="section-title">最近吃了</h2>
-      <div class="card-grid">{recentEats.map((r) => <RestaurantCard r={r} />)}</div>
+      <div class="card-grid">{recentEats.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
   {mustEats.length > 0 && (
     <section class="page page-inner block">
       <h2 class="section-title">务必吃</h2>
-      <div class="card-grid">{mustEats.map((r) => <RestaurantCard r={r} />)}</div>
+      <div class="card-grid">{mustEats.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
   {topList.length > 0 && (
     <section class="page page-inner block">
       <h2 class="section-title">应吃榜</h2>
-      <div class="card-grid">{topList.map((r) => <RestaurantCard r={r} />)}</div>
+      <div class="card-grid">{topList.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
@@ -59,7 +59,7 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   {waitList.length > 0 && (
     <section class="page page-inner block">
       <h2 class="section-title">待吃 <span class="block-sub">计划吃，还没吃</span></h2>
-      <div class="card-grid">{waitList.map((r) => <RestaurantCard r={r} />)}</div>
+      <div class="card-grid">{waitList.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
@@ -67,7 +67,7 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   {latest.length > 0 && (
     <section class="page page-inner block">
       <h2 class="section-title">收录 {eaten.length} 家</h2>
-      <div class="card-grid">{latest.map((r) => <RestaurantCard r={r} />)}</div>
+      <div class="card-grid">{latest.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 

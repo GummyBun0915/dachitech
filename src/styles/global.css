@@ -88,42 +88,6 @@ html, body { overflow-x: clip; }
   text-align: center;
 }
 
-/* 地图 pin（按榜单着色；在 .amap-container 内，需全局作用域） */
-.map-pin {
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--ink-2); border: 2px solid #fff;
-  box-shadow: 0 0 0 1px rgba(18,18,22,0.18);
-  cursor: pointer; transition: transform var(--t);
-}
-.map-pin--wubiChi { background: var(--level-wubi); width: 18px; height: 18px; }
-.map-pin--yingChiBang { background: var(--op); }
-.map-pin--daiChi { background: #d98a1f; } /* 待吃：暖橙，预留 */
-.map-pin.is-active { transform: scale(1.35); box-shadow: 0 0 0 3px var(--op-soft); z-index: 200; }
-
-/* 地图信息窗（自定义，覆盖高德默认气泡） */
-.map-iw {
-  min-width: 190px; max-width: 240px; padding: var(--s-3); font-family: var(--font-sans);
-  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-overlay);
-  box-shadow: 0 6px 20px rgba(18,18,22,0.16);
-}
-.map-iw-name { font-weight: 650; font-size: 0.95rem; color: var(--ink); letter-spacing: var(--ls-text); }
-.map-iw-meta { margin-top: 3px; font-size: var(--fs-sub); color: var(--ink-2); }
-.map-iw-meta .num { font-weight: 700; color: var(--ink); }
-.map-iw-actions { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
-.map-iw-actions a {
-  flex: 1; text-align: center; min-height: 34px; line-height: 34px;
-  border-radius: var(--r-chip); font-size: var(--fs-sub); font-weight: 600; text-decoration: none;
-}
-.map-iw-nav { background: var(--ink); color: var(--paper); }
-.map-iw-detail { border: 1px solid var(--line); color: var(--ink); }
-.map-reset {
-  position: absolute; top: var(--s-3); right: var(--s-3); z-index: 30;
-  min-height: 34px; padding: 0 var(--s-3); background: var(--paper); color: var(--ink);
-  border: 1px solid var(--line); border-radius: var(--r-chip);
-  font-size: var(--fs-sub); font-weight: 600; box-shadow: 0 1px 4px rgba(18,18,22,0.1);
-}
-.map-reset:hover { border-color: var(--op); color: var(--op); }
-
 /* 动效收敛 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -35,6 +35,11 @@ const here = Astro.url.pathname;
       {updated && <span>最后更新 <span class="num">{updated}</span></span>}
     </div>
   </footer>
+  <script>
+    // 全站灯箱：卡片与详情页的实拍图点开看高清
+    import "../client/lightbox.ts";
+    import "../client/album.ts";
+  </script>
 </body>
 </html>
 

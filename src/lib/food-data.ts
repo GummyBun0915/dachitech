@@ -115,3 +115,10 @@ export function detailPath(r: PubRestaurant) {
 export function regionPath(slug: string) {
   return `${BASE}${slug}/`;
 }
+
+/** 灯箱数据：大图 1600（高清）+ 缩略图 400（打开时先显示，避免白屏）；序列化进 data-gallery */
+export const galleryData = (r: PubRestaurant) =>
+  JSON.stringify(r.images.map((im, i) => ({
+    src: asset(im.src), msrc: asset(im.thumb), width: im.w, height: im.h,
+    alt: `${r.brand}实拍 ${i + 1}/${r.images.length}`,
+  })));
