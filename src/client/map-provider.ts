@@ -42,11 +42,7 @@ export async function createAmap(el: HTMLElement, key: string, security: string)
   const AMap = window.AMap;
   if (!AMap) throw new Error("AMap 未就绪");
   const map = new AMap.Map(el, { zoom: 12, resizeEnable: true, viewMode: "2D" });
-  // 高德鉴权失败（白名单/配额）不会抛错，只在 complete 前报 INVALID_USER_DOMAIN；等底图 complete，超时视为失败
-  await new Promise<void>((ok, fail) => {
-    const t = setTimeout(() => fail(new Error("地图底图加载超时")), 8000);
-    map.on("complete", () => { clearTimeout(t); ok(); });
-  });
+  // 不等底图 complete：首屏瓦片在手机上可能 >8s，等待会把「其实能用的地图」误判为失败；点位与交互不依赖瓦片
   let markers: any[] = [];
   const info = new AMap.InfoWindow({ isCustom: true, autoMove: true, anchor: "bottom-center", offset: new AMap.Pixel(0, -16) });
   return {
