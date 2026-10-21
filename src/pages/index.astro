@@ -1,12 +1,16 @@
 ---
 import Layout from "../components/Layout.astro";
 import RestaurantCard from "../components/RestaurantCard.astro";
+import GuideBadge from "../components/GuideBadge.astro";
 import {
   REGION_ORDER, regionName, regionCount, regionWait, regionPath,
-  recentEats, mustEats, topList, waitList, restaurants, isEaten, lastUpdated, fmtVisited,
+  recentEats, guideList, waitList, restaurants, isEaten, lastUpdated, fmtVisited,
 } from "../lib/food-data";
 
 const updated = lastUpdated();
+// 星其林（用户 2026-10-21）：星级店按 三星 → 二星 → 一星 一栏；必吃登单独一栏
+const starred = [...guideList("s3"), ...guideList("s2"), ...guideList("s1")];
+const bibs = guideList("bib");
 const eaten = restaurants.filter(isEaten);
 const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.contentUpdatedAt)).slice(0, 6);
 ---
@@ -14,9 +18,9 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   {/* 品牌海报块：fal 展示语域，首尾同色闭环 */}
   <section class="hero">
     <div class="page page-inner">
-      <p class="hero-kicker">个人实吃地图</p>
+      <p class="hero-kicker">星其林 · 私人美食指南</p>
       <h1 class="display">大吃特吃</h1>
-      <p class="hero-desc">深圳及其他地方的本人实吃记录。</p>
+      <p class="hero-desc">只写亲口吃过的店。深圳为主，走到哪吃到哪。</p>
       {updated && <p class="hero-updated">最后更新 <span class="num">{updated}</span></p>}
     </div>
   </section>
@@ -27,7 +31,7 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
       {REGION_ORDER.map((s) => (
         <a class="region-entry" href={regionPath(s)}>
           <span class="region-name">{regionName(s)}</span>
-          <span class="num region-count">{regionCount(s)} 家{regionWait(s) > 0 && <span class="region-wait"> · {regionWait(s)} 待吃</span>}</span>
+          <span class="num region-count">{regionCount(s) + regionWait(s) === 0 ? "还没开吃" : <>实吃 {regionCount(s)}{regionWait(s) > 0 && <span class="region-wait"> · 待吃 {regionWait(s)}</span>}</>}</span>
         </a>
       ))}
     </div>
@@ -41,24 +45,29 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
     </section>
   )}
 
-  {mustEats.length > 0 && (
+  {starred.length > 0 && (
     <section class="page page-inner block">
-      <h2 class="section-title">务必吃</h2>
-      <div class="card-grid">{mustEats.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
+      <h2 class="section-title">星其林 · 摘星 <span class="block-sub">星数越多，越值得专门跑一趟</span></h2>
+      <ul class="guide-key" aria-label="星级含义">
+        <li><GuideBadge level="s3" /> 值得专程</li>
+        <li><GuideBadge level="s2" /> 值得绕路</li>
+        <li><GuideBadge level="s1" /> 同类里出色</li>
+      </ul>
+      <div class="card-grid">{starred.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
-  {topList.length > 0 && (
+  {bibs.length > 0 && (
     <section class="page page-inner block">
-      <h2 class="section-title">应吃榜</h2>
-      <div class="card-grid">{topList.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
+      <h2 class="section-title">必吃登推介 <span class="block-sub">人均 ¥80 以内，好吃不贵，常去不腻</span></h2>
+      <div class="card-grid">{bibs.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
 
   {/* 待吃：计划吃、还没吃（无实吃证据，单独一档） */}
   {waitList.length > 0 && (
     <section class="page page-inner block">
-      <h2 class="section-title">待吃 <span class="block-sub">计划吃，还没吃</span></h2>
+      <h2 class="section-title">待吃清单 <span class="block-sub">已种草，还没去</span></h2>
       <div class="card-grid">{waitList.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
@@ -66,7 +75,7 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   {/* 最新收录（有数据时的真实内容） */}
   {latest.length > 0 && (
     <section class="page page-inner block">
-      <h2 class="section-title">收录 {eaten.length} 家</h2>
+      <h2 class="section-title">新近收录 <span class="block-sub">共 {eaten.length} 家实吃</span></h2>
       <div class="card-grid">{latest.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
@@ -97,6 +106,8 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
   .region-name { font-size: var(--fs-shop); font-weight: 600; letter-spacing: var(--ls-text); }
   .region-count { color: var(--ink-2); font-size: var(--fs-sub); }
   .region-wait { color: #9a5a12; }
+  .guide-key { list-style: none; margin: calc(-1 * var(--s-3)) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-6); font-size: var(--fs-sub); color: var(--ink-2); }
+  .guide-key li { display: flex; align-items: center; gap: 6px; }
   .block-sub { font-size: var(--fs-sub); font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
   .card-grid { display: grid; grid-template-columns: 1fr; gap: var(--s-4); }
   @media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }

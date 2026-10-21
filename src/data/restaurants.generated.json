@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T04:14:41.759Z",
+  "generatedAt": "2026-10-21T06:01:21.087Z",
   "policyVersion": "2026-09-16",
   "recentWindowDays": 120,
   "source": "food-sheet",
@@ -7,7 +7,7 @@
     {
       "slug": "shenzhen",
       "name": "深圳",
-      "count": 50,
+      "count": 52,
       "wait": 0
     },
     {
@@ -49,6 +49,129 @@
   ],
   "restaurants": [
     {
+      "id": "r_7e89402c",
+      "slug": "HereHaiเฮียให้-Ekkamai",
+      "regionSlug": "thailand",
+      "actualCity": "泰国",
+      "brand": "Here Hai เฮียให้",
+      "branch": "Ekkamai",
+      "category": null,
+      "cuisineTags": [
+        "泰菜",
+        "蟹肉炒饭"
+      ],
+      "reviewText": "米其林必比登；招牌蟹肉炒饭配绿酱",
+      "dishes": [
+        {
+          "name": "蟹肉炒饭",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s3",
+      "visitedAt": "2026-10-11",
+      "visitedAtPrecision": "day",
+      "inRecent": true,
+      "multiShop": false,
+      "amapQuery": "Here%20Hai%20%E0%B9%80%E0%B8%AE%E0%B8%B5%E0%B8%A2%E0%B9%83%E0%B8%AB%E0%B9%89%20%E6%B3%B0%E5%9B%BD%20Ekkamai",
+      "lng": 100.586228,
+      "lat": 13.730289,
+      "coordSystem": "WGS84",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "112/1 Ekkamai Rd, Bangkok",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_7e89402c/cover.webp",
+          "thumb": "images/r/r_7e89402c/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_7e89402c/p1.webp",
+          "thumb": "images/r/r_7e89402c/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_7e89402c/cover.webp"
+    },
+    {
+      "id": "r_c9ac0556",
+      "slug": "LaemCharoenSeafood-CentralRama9",
+      "regionSlug": "thailand",
+      "actualCity": "泰国",
+      "brand": "Laem Charoen Seafood",
+      "branch": "Central Rama 9",
+      "category": null,
+      "cuisineTags": [
+        "泰式海鲜"
+      ],
+      "reviewText": "",
+      "dishes": [],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s2",
+      "visitedAt": "2026-10-10",
+      "visitedAtPrecision": "day",
+      "inRecent": true,
+      "multiShop": false,
+      "amapQuery": "Laem%20Charoen%20Seafood%20%E6%B3%B0%E5%9B%BD%20Central%20Rama%209",
+      "lng": 100.566067,
+      "lat": 13.758183,
+      "coordSystem": "WGS84",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "Central Rama 9, Bangkok",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_c9ac0556/cover.webp",
+          "thumb": "images/r/r_c9ac0556/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_c9ac0556/p1.webp",
+          "thumb": "images/r/r_c9ac0556/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_c9ac0556/p2.webp",
+          "thumb": "images/r/r_c9ac0556/p2-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_c9ac0556/p3.webp",
+          "thumb": "images/r/r_c9ac0556/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_c9ac0556/p4.webp",
+          "thumb": "images/r/r_c9ac0556/p4-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_c9ac0556/cover.webp"
+    },
+    {
       "id": "r_5c72d39f",
       "slug": "国灵肠粉",
       "regionSlug": "zhongshan",
@@ -61,9 +184,9 @@
       ],
       "reviewText": "",
       "dishes": [],
-      "score10": 8.5,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "wubiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s2",
       "visitedAt": "2026-09-15",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -99,9 +222,9 @@
           "score10": null
         }
       ],
-      "score10": 8.5,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "wubiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s2",
       "visitedAt": "2026-09-13",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -121,7 +244,22 @@
           "src": "images/r/r_16ab10fe/cover.webp",
           "thumb": "images/r/r_16ab10fe/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_16ab10fe/p1.webp",
+          "thumb": "images/r/r_16ab10fe/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_16ab10fe/p2.webp",
+          "thumb": "images/r/r_16ab10fe/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_16ab10fe/cover.webp"
@@ -144,9 +282,9 @@
           "score10": null
         }
       ],
-      "score10": 8.5,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "wubiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s2",
       "visitedAt": "2026-05-29",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -166,31 +304,36 @@
           "src": "images/r/r_5d336e49/cover.webp",
           "thumb": "images/r/r_5d336e49/cover-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_5d336e49/p1.webp",
           "thumb": "images/r/r_5d336e49/p1-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_5d336e49/p2.webp",
           "thumb": "images/r/r_5d336e49/p2-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_5d336e49/p3.webp",
           "thumb": "images/r/r_5d336e49/p3-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_5d336e49/p4.webp",
           "thumb": "images/r/r_5d336e49/p4-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_5d336e49/cover.webp"
@@ -208,9 +351,9 @@
       ],
       "reviewText": "",
       "dishes": [],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "yingChiBang",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-09-15",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -230,7 +373,15 @@
           "src": "images/r/r_cfab56ee/cover.webp",
           "thumb": "images/r/r_cfab56ee/cover-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_cfab56ee/p1.webp",
+          "thumb": "images/r/r_cfab56ee/p1-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_cfab56ee/cover.webp"
@@ -253,9 +404,9 @@
           "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "yingChiBang",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-09-14",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -275,13 +426,36 @@
           "src": "images/r/r_d5510e5e/cover.webp",
           "thumb": "images/r/r_d5510e5e/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_d5510e5e/p1.webp",
           "thumb": "images/r/r_d5510e5e/p1-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_d5510e5e/p2.webp",
+          "thumb": "images/r/r_d5510e5e/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_d5510e5e/p3.webp",
+          "thumb": "images/r/r_d5510e5e/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_d5510e5e/p4.webp",
+          "thumb": "images/r/r_d5510e5e/p4-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_d5510e5e/cover.webp"
@@ -299,9 +473,9 @@
       ],
       "reviewText": "",
       "dishes": [],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "yingChiBang",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-09-13",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -321,13 +495,15 @@
           "src": "images/r/r_bc8fb461/cover.webp",
           "thumb": "images/r/r_bc8fb461/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_bc8fb461/p2.webp",
           "thumb": "images/r/r_bc8fb461/p2-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_bc8fb461/cover.webp"
@@ -351,9 +527,9 @@
           "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-06-22",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -372,7 +548,7 @@
           "address": "",
           "lng": 114.05333,
           "lat": 22.536315,
-          "score10": 8,
+          "score10": null,
           "visitedAt": "2026-06-22",
           "closed": false,
           "amapQuery": "%E5%A4%A7%E9%98%AA%E7%83%A7%E8%82%89%20%E6%B7%B1%E5%9C%B3%20BAKA%E4%B8%80%E4%BB%A3%EF%BC%88%E8%B4%AD%E7%89%A9%E5%85%AC%E5%9B%AD%EF%BC%89"
@@ -396,7 +572,8 @@
           "src": "images/r/r_f573b614/cover.webp",
           "thumb": "images/r/r_f573b614/cover-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_f573b614/cover.webp"
@@ -423,9 +600,9 @@
           "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "yingChiBang",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-05-31",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -445,37 +622,42 @@
           "src": "images/r/r_77d9fb73/cover.webp",
           "thumb": "images/r/r_77d9fb73/cover-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_77d9fb73/p1.webp",
           "thumb": "images/r/r_77d9fb73/p1-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_77d9fb73/p2.webp",
           "thumb": "images/r/r_77d9fb73/p2-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_77d9fb73/p4.webp",
           "thumb": "images/r/r_77d9fb73/p4-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_77d9fb73/p5.webp",
           "thumb": "images/r/r_77d9fb73/p5-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_77d9fb73/cover.webp"
     },
     {
-      "id": "r_01c8ab1f",
+      "id": "r_c2900e2e",
       "slug": "寿司郎",
       "regionSlug": "shenzhen",
       "actualCity": "深圳",
@@ -488,50 +670,50 @@
       "reviewText": "见附件",
       "dishes": [
         {
-          "name": "金枪鱼\n鹅肝\n抹茶布丁",
+          "name": "五月活动 / 焦糖鹅肝寿司",
           "score10": null
         },
         {
-          "name": "五月活动 / 焦糖鹅肝寿司",
+          "name": "金枪鱼\n鹅肝\n抹茶布丁",
           "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-05-16",
       "visitedAtPrecision": "day",
       "inRecent": false,
       "multiShop": true,
-      "amapQuery": "%E5%AF%BF%E5%8F%B8%E9%83%8E%20%E6%B7%B1%E5%9C%B3%20%E6%B5%B7%E5%B2%B8%E5%9F%8E",
-      "lng": 113.935399,
-      "lat": 22.517659,
+      "amapQuery": "%E5%AF%BF%E5%8F%B8%E9%83%8E%20%E6%B7%B1%E5%9C%B3%20KKONE",
+      "lng": 114.026721,
+      "lat": 22.527642,
       "coordSystem": "GCJ02",
       "poiConfidence": null,
       "closed": false,
       "avgPrice": null,
       "branches": [
         {
-          "id": "r_01c8ab1f",
-          "name": "海岸城",
-          "address": "",
-          "lng": 113.935399,
-          "lat": 22.517659,
-          "score10": 8,
-          "visitedAt": "2026-04-26",
-          "closed": false,
-          "amapQuery": "%E5%AF%BF%E5%8F%B8%E9%83%8E%20%E6%B7%B1%E5%9C%B3%20%E6%B5%B7%E5%B2%B8%E5%9F%8E"
-        },
-        {
           "id": "r_c2900e2e",
           "name": "KKONE",
           "address": "",
           "lng": 114.026721,
           "lat": 22.527642,
-          "score10": 8,
+          "score10": null,
           "visitedAt": "2026-05-16",
           "closed": false,
           "amapQuery": "%E5%AF%BF%E5%8F%B8%E9%83%8E%20%E6%B7%B1%E5%9C%B3%20KKONE"
+        },
+        {
+          "id": "r_01c8ab1f",
+          "name": "海岸城",
+          "address": "",
+          "lng": 113.935399,
+          "lat": 22.517659,
+          "score10": null,
+          "visitedAt": "2026-04-26",
+          "closed": false,
+          "amapQuery": "%E5%AF%BF%E5%8F%B8%E9%83%8E%20%E6%B7%B1%E5%9C%B3%20%E6%B5%B7%E5%B2%B8%E5%9F%8E"
         },
         {
           "id": "r_89e84223",
@@ -547,63 +729,8 @@
       ],
       "address": "",
       "contentUpdatedAt": "2026-10-21",
-      "images": [
-        {
-          "src": "images/r/r_01c8ab1f/cover.webp",
-          "thumb": "images/r/r_01c8ab1f/cover-400.webp",
-          "w": 1600,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p2.webp",
-          "thumb": "images/r/r_01c8ab1f/p2-400.webp",
-          "w": 1600,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p3.webp",
-          "thumb": "images/r/r_01c8ab1f/p3-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p4.webp",
-          "thumb": "images/r/r_01c8ab1f/p4-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p5.webp",
-          "thumb": "images/r/r_01c8ab1f/p5-400.webp",
-          "w": 1600,
-          "h": 1200
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p6.webp",
-          "thumb": "images/r/r_01c8ab1f/p6-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p7.webp",
-          "thumb": "images/r/r_01c8ab1f/p7-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p8.webp",
-          "thumb": "images/r/r_01c8ab1f/p8-400.webp",
-          "w": 1600,
-          "h": 1200
-        },
-        {
-          "src": "images/r/r_01c8ab1f/p9.webp",
-          "thumb": "images/r/r_01c8ab1f/p9-400.webp",
-          "w": 1200,
-          "h": 1600
-        }
-      ],
-      "coverImage": "images/r/r_01c8ab1f/cover.webp"
+      "images": [],
+      "coverImage": null
     },
     {
       "id": "r_5f30f5e8",
@@ -620,12 +747,12 @@
       "dishes": [
         {
           "name": "扇贝粉丝",
-          "score10": 9.6
+          "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -642,215 +769,6 @@
       "contentUpdatedAt": "2026-10-21",
       "images": [],
       "coverImage": null
-    },
-    {
-      "id": "r_d7e01f6f",
-      "slug": "林鲜记",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "林鲜记",
-      "branch": null,
-      "category": null,
-      "cuisineTags": [],
-      "reviewText": "",
-      "dishes": [
-        {
-          "name": "炒饭",
-          "score10": null
-        }
-      ],
-      "score10": 7.5,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-05-05",
-      "visitedAtPrecision": "day",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E6%9E%97%E9%B2%9C%E8%AE%B0%20%E6%B7%B1%E5%9C%B3",
-      "lng": null,
-      "lat": null,
-      "coordSystem": null,
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [
-        {
-          "src": "images/r/r_d7e01f6f/cover.webp",
-          "thumb": "images/r/r_d7e01f6f/cover-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_d7e01f6f/p2.webp",
-          "thumb": "images/r/r_d7e01f6f/p2-400.webp",
-          "w": 1200,
-          "h": 1600
-        }
-      ],
-      "coverImage": "images/r/r_d7e01f6f/cover.webp"
-    },
-    {
-      "id": "r_5149c8ec",
-      "slug": "烧鹅佬-壹方城附近-宝安",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "烧鹅佬",
-      "branch": "壹方城附近 / 宝安",
-      "category": null,
-      "cuisineTags": [
-        "粤菜"
-      ],
-      "reviewText": "",
-      "dishes": [
-        {
-          "name": "陈村粉 烧鹅 白切鸡",
-          "score10": null
-        }
-      ],
-      "score10": 7.5,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-05-02",
-      "visitedAtPrecision": "day",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E7%83%A7%E9%B9%85%E4%BD%AC%20%E6%B7%B1%E5%9C%B3%20%E5%A3%B9%E6%96%B9%E5%9F%8E%E9%99%84%E8%BF%91%20%2F%20%E5%AE%9D%E5%AE%89",
-      "lng": 113.888093,
-      "lat": 22.552912,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": 100,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [
-        {
-          "src": "images/r/r_5149c8ec/cover.webp",
-          "thumb": "images/r/r_5149c8ec/cover-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_5149c8ec/p1.webp",
-          "thumb": "images/r/r_5149c8ec/p1-400.webp",
-          "w": 1600,
-          "h": 1200
-        },
-        {
-          "src": "images/r/r_5149c8ec/p2.webp",
-          "thumb": "images/r/r_5149c8ec/p2-400.webp",
-          "w": 1200,
-          "h": 1600
-        }
-      ],
-      "coverImage": "images/r/r_5149c8ec/cover.webp"
-    },
-    {
-      "id": "r_eb8a7941",
-      "slug": "fabric-theMARKET",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "fabric",
-      "branch": "the MARKET",
-      "category": null,
-      "cuisineTags": [
-        "西餐"
-      ],
-      "reviewText": "",
-      "dishes": [
-        {
-          "name": "黑松露千层土豆",
-          "score10": null
-        },
-        {
-          "name": "三文鱼松饼 /西班牙火腿",
-          "score10": null
-        }
-      ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-07-12",
-      "visitedAtPrecision": "day",
-      "inRecent": true,
-      "multiShop": false,
-      "amapQuery": "fabric%20%E6%B7%B1%E5%9C%B3%20the%20MARKET",
-      "lng": 113.993122,
-      "lat": 22.537271,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": 100,
-      "branches": [],
-      "address": "锦绣北街8号东部工业区F栋105A（华侨城）",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_96a2bc4c",
-      "slug": "高丽村-兴华二路",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "高丽村",
-      "branch": "兴华二路",
-      "category": null,
-      "cuisineTags": [
-        "韩料"
-      ],
-      "reviewText": "",
-      "dishes": [
-        {
-          "name": "土豆脊骨汤",
-          "score10": null
-        },
-        {
-          "name": "石锅拌饭",
-          "score10": null
-        }
-      ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-07-05",
-      "visitedAtPrecision": "day",
-      "inRecent": true,
-      "multiShop": false,
-      "amapQuery": "%E9%AB%98%E4%B8%BD%E6%9D%91%20%E6%B7%B1%E5%9C%B3%20%E5%85%B4%E5%8D%8E%E4%BA%8C%E8%B7%AF",
-      "lng": 113.902792,
-      "lat": 22.562213,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": 100,
-      "branches": [],
-      "address": "兴华二路62-2号",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [
-        {
-          "src": "images/r/r_96a2bc4c/cover.webp",
-          "thumb": "images/r/r_96a2bc4c/cover-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_96a2bc4c/p1.webp",
-          "thumb": "images/r/r_96a2bc4c/p1-400.webp",
-          "w": 1200,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_96a2bc4c/p2.webp",
-          "thumb": "images/r/r_96a2bc4c/p2-400.webp",
-          "w": 1200,
-          "h": 1600
-        }
-      ],
-      "coverImage": "images/r/r_96a2bc4c/cover.webp"
     },
     {
       "id": "r_64d358cc",
@@ -878,9 +796,9 @@
           "score10": null
         }
       ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "bib",
       "visitedAt": "2026-07-01",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -924,9 +842,9 @@
           "score10": null
         }
       ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "bib",
       "visitedAt": "2026-05-26",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -941,69 +859,16 @@
       "branches": [],
       "address": "海德三道海岸城东座1层121号",
       "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_10c9b968",
-      "slug": "胡麻-深圳湾未来广场",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "胡麻",
-      "branch": "深圳湾未来广场",
-      "category": null,
-      "cuisineTags": [
-        "其他"
-      ],
-      "reviewText": "",
-      "dishes": [
-        {
-          "name": "米线",
-          "score10": null
-        },
-        {
-          "name": "蛋糕",
-          "score10": null
-        }
-      ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-05-20",
-      "visitedAtPrecision": "day",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E8%83%A1%E9%BA%BB%20%E6%B7%B1%E5%9C%B3%20%E6%B7%B1%E5%9C%B3%E6%B9%BE%E6%9C%AA%E6%9D%A5%E5%B9%BF%E5%9C%BA",
-      "lng": 113.942923,
-      "lat": 22.514607,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": 120,
-      "branches": [],
-      "address": "海德一道1218号深圳湾未来广场B栋CL120",
-      "contentUpdatedAt": "2026-10-21",
       "images": [
         {
-          "src": "images/r/r_10c9b968/cover.webp",
-          "thumb": "images/r/r_10c9b968/cover-400.webp",
+          "src": "images/r/r_6c965cfb/cover.webp",
+          "thumb": "images/r/r_6c965cfb/cover-400.webp",
           "w": 1600,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_10c9b968/p1.webp",
-          "thumb": "images/r/r_10c9b968/p1-400.webp",
-          "w": 1600,
-          "h": 1600
-        },
-        {
-          "src": "images/r/r_10c9b968/p2.webp",
-          "thumb": "images/r/r_10c9b968/p2-400.webp",
-          "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
-      "coverImage": "images/r/r_10c9b968/cover.webp"
+      "coverImage": "images/r/r_6c965cfb/cover.webp"
     },
     {
       "id": "r_3f7a7236",
@@ -1031,9 +896,9 @@
           "score10": null
         }
       ],
-      "score10": 7,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "keyiChi",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "bib",
       "visitedAt": "2026-05-13",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -1050,6 +915,309 @@
       "contentUpdatedAt": "2026-10-21",
       "images": [],
       "coverImage": null
+    },
+    {
+      "id": "r_eb8a7941",
+      "slug": "fabric-theMARKET",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "fabric",
+      "branch": "the MARKET",
+      "category": null,
+      "cuisineTags": [
+        "西餐"
+      ],
+      "reviewText": "",
+      "dishes": [
+        {
+          "name": "黑松露千层土豆",
+          "score10": null
+        },
+        {
+          "name": "三文鱼松饼 /西班牙火腿",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "sel",
+      "visitedAt": "2026-07-12",
+      "visitedAtPrecision": "day",
+      "inRecent": true,
+      "multiShop": false,
+      "amapQuery": "fabric%20%E6%B7%B1%E5%9C%B3%20the%20MARKET",
+      "lng": 113.993122,
+      "lat": 22.537271,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": 100,
+      "branches": [],
+      "address": "锦绣北街8号东部工业区F栋105A（华侨城）",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_eb8a7941/cover.webp",
+          "thumb": "images/r/r_eb8a7941/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_eb8a7941/p1.webp",
+          "thumb": "images/r/r_eb8a7941/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_eb8a7941/cover.webp"
+    },
+    {
+      "id": "r_96a2bc4c",
+      "slug": "高丽村-兴华二路",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "高丽村",
+      "branch": "兴华二路",
+      "category": null,
+      "cuisineTags": [
+        "韩料"
+      ],
+      "reviewText": "",
+      "dishes": [
+        {
+          "name": "土豆脊骨汤",
+          "score10": null
+        },
+        {
+          "name": "石锅拌饭",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "sel",
+      "visitedAt": "2026-07-05",
+      "visitedAtPrecision": "day",
+      "inRecent": true,
+      "multiShop": false,
+      "amapQuery": "%E9%AB%98%E4%B8%BD%E6%9D%91%20%E6%B7%B1%E5%9C%B3%20%E5%85%B4%E5%8D%8E%E4%BA%8C%E8%B7%AF",
+      "lng": 113.902792,
+      "lat": 22.562213,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": 100,
+      "branches": [],
+      "address": "兴华二路62-2号",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_96a2bc4c/cover.webp",
+          "thumb": "images/r/r_96a2bc4c/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_96a2bc4c/p1.webp",
+          "thumb": "images/r/r_96a2bc4c/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_96a2bc4c/p2.webp",
+          "thumb": "images/r/r_96a2bc4c/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_96a2bc4c/cover.webp"
+    },
+    {
+      "id": "r_10c9b968",
+      "slug": "胡麻-深圳湾未来广场",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "胡麻",
+      "branch": "深圳湾未来广场",
+      "category": null,
+      "cuisineTags": [
+        "其他"
+      ],
+      "reviewText": "",
+      "dishes": [
+        {
+          "name": "米线",
+          "score10": null
+        },
+        {
+          "name": "蛋糕",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "sel",
+      "visitedAt": "2026-05-20",
+      "visitedAtPrecision": "day",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E8%83%A1%E9%BA%BB%20%E6%B7%B1%E5%9C%B3%20%E6%B7%B1%E5%9C%B3%E6%B9%BE%E6%9C%AA%E6%9D%A5%E5%B9%BF%E5%9C%BA",
+      "lng": 113.942923,
+      "lat": 22.514607,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": 120,
+      "branches": [],
+      "address": "海德一道1218号深圳湾未来广场B栋CL120",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_10c9b968/cover.webp",
+          "thumb": "images/r/r_10c9b968/cover-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_10c9b968/p1.webp",
+          "thumb": "images/r/r_10c9b968/p1-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_10c9b968/p2.webp",
+          "thumb": "images/r/r_10c9b968/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_10c9b968/cover.webp"
+    },
+    {
+      "id": "r_d7e01f6f",
+      "slug": "林鲜记",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "林鲜记",
+      "branch": null,
+      "category": null,
+      "cuisineTags": [],
+      "reviewText": "",
+      "dishes": [
+        {
+          "name": "炒饭",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "sel",
+      "visitedAt": "2026-05-05",
+      "visitedAtPrecision": "day",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E6%9E%97%E9%B2%9C%E8%AE%B0%20%E6%B7%B1%E5%9C%B3",
+      "lng": null,
+      "lat": null,
+      "coordSystem": null,
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_d7e01f6f/cover.webp",
+          "thumb": "images/r/r_d7e01f6f/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_d7e01f6f/p2.webp",
+          "thumb": "images/r/r_d7e01f6f/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_d7e01f6f/p3.webp",
+          "thumb": "images/r/r_d7e01f6f/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_d7e01f6f/cover.webp"
+    },
+    {
+      "id": "r_5149c8ec",
+      "slug": "烧鹅佬-壹方城附近-宝安",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "烧鹅佬",
+      "branch": "壹方城附近 / 宝安",
+      "category": null,
+      "cuisineTags": [
+        "粤菜"
+      ],
+      "reviewText": "",
+      "dishes": [
+        {
+          "name": "陈村粉 烧鹅 白切鸡",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "sel",
+      "visitedAt": "2026-05-02",
+      "visitedAtPrecision": "day",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E7%83%A7%E9%B9%85%E4%BD%AC%20%E6%B7%B1%E5%9C%B3%20%E5%A3%B9%E6%96%B9%E5%9F%8E%E9%99%84%E8%BF%91%20%2F%20%E5%AE%9D%E5%AE%89",
+      "lng": 113.888093,
+      "lat": 22.552912,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": 100,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_5149c8ec/cover.webp",
+          "thumb": "images/r/r_5149c8ec/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_5149c8ec/p1.webp",
+          "thumb": "images/r/r_5149c8ec/p1-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_5149c8ec/p2.webp",
+          "thumb": "images/r/r_5149c8ec/p2-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_5149c8ec/cover.webp"
     },
     {
       "id": "r_aae18d27",
@@ -1072,7 +1240,7 @@
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-10-12",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -1092,82 +1260,52 @@
           "src": "images/r/r_aae18d27/cover.webp",
           "thumb": "images/r/r_aae18d27/cover-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_aae18d27/cover.webp"
     },
     {
-      "id": "r_7e89402c",
-      "slug": "HereHaiเฮียให้-Ekkamai",
-      "regionSlug": "thailand",
-      "actualCity": "泰国",
-      "brand": "Here Hai เฮียให้",
-      "branch": "Ekkamai",
+      "id": "r_182cd9c6",
+      "slug": "笨萝卜-西乡店",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "笨萝卜",
+      "branch": "西乡店",
       "category": null,
       "cuisineTags": [
-        "泰菜",
-        "蟹肉炒饭"
-      ],
-      "reviewText": "米其林必比登；招牌蟹肉炒饭配绿酱",
-      "dishes": [
-        {
-          "name": "蟹肉炒饭",
-          "score10": null
-        }
-      ],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-10-11",
-      "visitedAtPrecision": "day",
-      "inRecent": true,
-      "multiShop": false,
-      "amapQuery": "Here%20Hai%20%E0%B9%80%E0%B8%AE%E0%B8%B5%E0%B8%A2%E0%B9%83%E0%B8%AB%E0%B9%89%20%E6%B3%B0%E5%9B%BD%20Ekkamai",
-      "lng": null,
-      "lat": null,
-      "coordSystem": null,
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "112/1 Ekkamai Rd, Bangkok",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_c9ac0556",
-      "slug": "LaemCharoenSeafood-CentralRama9",
-      "regionSlug": "thailand",
-      "actualCity": "泰国",
-      "brand": "Laem Charoen Seafood",
-      "branch": "Central Rama 9",
-      "category": null,
-      "cuisineTags": [
-        "泰式海鲜"
+        "湘菜"
       ],
       "reviewText": "",
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-10-10",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-10-06",
       "visitedAtPrecision": "day",
       "inRecent": true,
       "multiShop": false,
-      "amapQuery": "Laem%20Charoen%20Seafood%20%E6%B3%B0%E5%9B%BD%20Central%20Rama%209",
-      "lng": null,
-      "lat": null,
-      "coordSystem": null,
+      "amapQuery": "%E7%AC%A8%E8%90%9D%E5%8D%9C%20%E6%B7%B1%E5%9C%B3%20%E8%A5%BF%E4%B9%A1%E5%BA%97",
+      "lng": 113.863617,
+      "lat": 22.578333,
+      "coordSystem": "GCJ02",
       "poiConfidence": null,
       "closed": false,
       "avgPrice": null,
       "branches": [],
-      "address": "Central Rama 9, Bangkok",
+      "address": "",
       "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
+      "images": [
+        {
+          "src": "images/r/r_182cd9c6/cover.webp",
+          "thumb": "images/r/r_182cd9c6/cover-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_182cd9c6/cover.webp"
     },
     {
       "id": "r_5643f164",
@@ -1185,7 +1323,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-10-05",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -1205,7 +1343,8 @@
           "src": "images/r/r_5643f164/cover.webp",
           "thumb": "images/r/r_5643f164/cover-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_5643f164/cover.webp"
@@ -1226,7 +1365,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-10-03",
       "visitedAtPrecision": "day",
       "inRecent": true,
@@ -1246,30 +1385,33 @@
           "src": "images/r/d_eminentfrog_geylang/cover.webp",
           "thumb": "images/r/d_eminentfrog_geylang/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/d_eminentfrog_geylang/p1.webp",
           "thumb": "images/r/d_eminentfrog_geylang/p1-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/d_eminentfrog_geylang/p2.webp",
           "thumb": "images/r/d_eminentfrog_geylang/p2-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/d_eminentfrog_geylang/cover.webp"
     },
     {
       "id": "r_1a375644",
-      "slug": "天天海南鸡饭TianTianHainaneseChickenRice-乌节路一带美食广场",
+      "slug": "天天海南鸡饭TianTianHainaneseChickenRice-LuckyPlaza（乌节路）",
       "regionSlug": "singapore",
       "actualCity": "新加坡",
       "brand": "天天海南鸡饭 Tian Tian Hainanese Chicken Rice",
-      "branch": "乌节路一带美食广场",
+      "branch": "Lucky Plaza（乌节路）",
       "category": null,
       "cuisineTags": [
         "海南鸡饭"
@@ -1278,12 +1420,12 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-10-03",
       "visitedAtPrecision": "day",
       "inRecent": true,
       "multiShop": false,
-      "amapQuery": "%E5%A4%A9%E5%A4%A9%E6%B5%B7%E5%8D%97%E9%B8%A1%E9%A5%AD%20Tian%20Tian%20Hainanese%20Chicken%20Rice%20%E6%96%B0%E5%8A%A0%E5%9D%A1%20%E4%B9%8C%E8%8A%82%E8%B7%AF%E4%B8%80%E5%B8%A6%E7%BE%8E%E9%A3%9F%E5%B9%BF%E5%9C%BA",
+      "amapQuery": "%E5%A4%A9%E5%A4%A9%E6%B5%B7%E5%8D%97%E9%B8%A1%E9%A5%AD%20Tian%20Tian%20Hainanese%20Chicken%20Rice%20%E6%96%B0%E5%8A%A0%E5%9D%A1%20Lucky%20Plaza%EF%BC%88%E4%B9%8C%E8%8A%82%E8%B7%AF%EF%BC%89",
       "lng": 103.833947,
       "lat": 1.30457,
       "coordSystem": "WGS84",
@@ -1298,10 +1440,53 @@
           "src": "images/r/r_1a375644/cover.webp",
           "thumb": "images/r/r_1a375644/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_1a375644/cover.webp"
+    },
+    {
+      "id": "r_9e8cfe82",
+      "slug": "南门涮肉",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "南门涮肉",
+      "branch": null,
+      "category": null,
+      "cuisineTags": [
+        "火锅",
+        "涮肉"
+      ],
+      "reviewText": "",
+      "dishes": [],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-08-29",
+      "visitedAtPrecision": "day",
+      "inRecent": true,
+      "multiShop": false,
+      "amapQuery": "%E5%8D%97%E9%97%A8%E6%B6%AE%E8%82%89%20%E6%B7%B1%E5%9C%B3",
+      "lng": 113.991662,
+      "lat": 22.525189,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_9e8cfe82/cover.webp",
+          "thumb": "images/r/r_9e8cfe82/cover-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_9e8cfe82/cover.webp"
     },
     {
       "id": "r_b30bafdd",
@@ -1322,12 +1507,12 @@
         },
         {
           "name": "豆乳拿铁",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-03",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1344,6 +1529,68 @@
       "contentUpdatedAt": "2026-10-21",
       "images": [],
       "coverImage": null
+    },
+    {
+      "id": "r_6acad1bb",
+      "slug": "喜上鸽-罗湖",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "喜上鸽",
+      "branch": "罗湖",
+      "category": null,
+      "cuisineTags": [
+        "粤菜"
+      ],
+      "reviewText": "✅第一次吃到我觉得完全没有腥味怪味的鸽子，盐焗+红烧都可以 纯香\n✅红葱头鸡\n\n❌扇贝粉丝 性价比低了\n\n肥牛juejue煲 好吃但小贵 可以一试",
+      "dishes": [],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-02",
+      "visitedAtPrecision": "month",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E5%96%9C%E4%B8%8A%E9%B8%BD%20%E6%B7%B1%E5%9C%B3%20%E7%BD%97%E6%B9%96",
+      "lng": 114.126228,
+      "lat": 22.539963,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_6acad1bb/cover.webp",
+          "thumb": "images/r/r_6acad1bb/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_6acad1bb/p1.webp",
+          "thumb": "images/r/r_6acad1bb/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_6acad1bb/p2.webp",
+          "thumb": "images/r/r_6acad1bb/p2-400.webp",
+          "w": 1600,
+          "h": 1200,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_6acad1bb/p3.webp",
+          "thumb": "images/r/r_6acad1bb/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_6acad1bb/cover.webp"
     },
     {
       "id": "r_e92ee78c",
@@ -1365,7 +1612,7 @@
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1385,16 +1632,153 @@
           "src": "images/r/r_e92ee78c/cover.webp",
           "thumb": "images/r/r_e92ee78c/cover-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_e92ee78c/p2.webp",
           "thumb": "images/r/r_e92ee78c/p2-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_e92ee78c/cover.webp"
+    },
+    {
+      "id": "r_01ce3a40",
+      "slug": "黑鸭煲-宝安",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "黑鸭煲",
+      "branch": "宝安",
+      "category": null,
+      "cuisineTags": [
+        "鄂菜"
+      ],
+      "reviewText": "1. 吃不出鸭味是没问题的\n2. 粉好吃 很特别\n3. 酱料重了 重口人倒是可以吃\n还是不少人喜欢广东辣的",
+      "dishes": [],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-02",
+      "visitedAtPrecision": "month",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E9%BB%91%E9%B8%AD%E7%85%B2%20%E6%B7%B1%E5%9C%B3%20%E5%AE%9D%E5%AE%89",
+      "lng": 113.871875,
+      "lat": 22.569125,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_01ce3a40/cover.webp",
+          "thumb": "images/r/r_01ce3a40/cover-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_01ce3a40/p1.webp",
+          "thumb": "images/r/r_01ce3a40/p1-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_01ce3a40/cover.webp"
+    },
+    {
+      "id": "r_7afa2338",
+      "slug": "蒋三小面-弹子石",
+      "regionSlug": "chongqing",
+      "actualCity": "重庆",
+      "brand": "蒋三小面",
+      "branch": "弹子石",
+      "category": null,
+      "cuisineTags": [
+        "川菜"
+      ],
+      "reviewText": "2023-2026 吃了三次 夯\n  1. 碗杂面 12r\n  2. 重庆小面 7r+煎蛋2r\n此店开了二十几年",
+      "dishes": [
+        {
+          "name": "碗杂面",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-02",
+      "visitedAtPrecision": "month",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E8%92%8B%E4%B8%89%E5%B0%8F%E9%9D%A2%20%E9%87%8D%E5%BA%86%20%E5%BC%B9%E5%AD%90%E7%9F%B3",
+      "lng": 106.600989,
+      "lat": 29.577724,
+      "coordSystem": "GCJ02",
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_7afa2338/cover.webp",
+          "thumb": "images/r/r_7afa2338/cover-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_7afa2338/cover.webp"
+    },
+    {
+      "id": "r_c25f71b1",
+      "slug": "婶婶铺泡菜粉-南山",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "婶婶铺泡菜粉",
+      "branch": "南山",
+      "category": null,
+      "cuisineTags": [
+        "川菜"
+      ],
+      "reviewText": "吃了不下50次吧 夯完了",
+      "dishes": [],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2026-02",
+      "visitedAtPrecision": "month",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E5%A9%B6%E5%A9%B6%E9%93%BA%E6%B3%A1%E8%8F%9C%E7%B2%89%20%E6%B7%B1%E5%9C%B3%20%E5%8D%97%E5%B1%B1",
+      "lng": null,
+      "lat": null,
+      "coordSystem": null,
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_c25f71b1/cover.webp",
+          "thumb": "images/r/r_c25f71b1/cover-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_c25f71b1/cover.webp"
     },
     {
       "id": "r_65073582",
@@ -1411,7 +1795,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1444,12 +1828,12 @@
       "dishes": [
         {
           "name": "黄咖喱",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1457,39 +1841,6 @@
       "amapQuery": "%E5%86%AC%E9%98%B4%E5%8A%9F%20%E6%B7%B1%E5%9C%B3%20%E5%8D%97%E5%B1%B1",
       "lng": 113.923826,
       "lat": 22.527952,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_01ce3a40",
-      "slug": "黑鸭煲-宝安",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "黑鸭煲",
-      "branch": "宝安",
-      "category": null,
-      "cuisineTags": [
-        "鄂菜"
-      ],
-      "reviewText": "1. 吃不出鸭味是没问题的\n2. 粉好吃 很特别\n3. 酱料重了 重口人倒是可以吃\n还是不少人喜欢广东辣的",
-      "dishes": [],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-02",
-      "visitedAtPrecision": "month",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E9%BB%91%E9%B8%AD%E7%85%B2%20%E6%B7%B1%E5%9C%B3%20%E5%AE%9D%E5%AE%89",
-      "lng": 113.871875,
-      "lat": 22.569125,
       "coordSystem": "GCJ02",
       "poiConfidence": null,
       "closed": false,
@@ -1520,7 +1871,7 @@
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1529,44 +1880,6 @@
       "lng": null,
       "lat": null,
       "coordSystem": null,
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_7afa2338",
-      "slug": "蒋三小面-弹子石",
-      "regionSlug": "chongqing",
-      "actualCity": "重庆",
-      "brand": "蒋三小面",
-      "branch": "弹子石",
-      "category": null,
-      "cuisineTags": [
-        "川菜"
-      ],
-      "reviewText": "2023-2026 吃了三次 夯\n  1. 碗杂面 12r\n  2. 重庆小面 7r+煎蛋2r\n此店开了二十几年",
-      "dishes": [
-        {
-          "name": "碗杂面",
-          "score10": 9.8
-        }
-      ],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-02",
-      "visitedAtPrecision": "month",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E8%92%8B%E4%B8%89%E5%B0%8F%E9%9D%A2%20%E9%87%8D%E5%BA%86%20%E5%BC%B9%E5%AD%90%E7%9F%B3",
-      "lng": 106.600989,
-      "lat": 29.577724,
-      "coordSystem": "GCJ02",
       "poiConfidence": null,
       "closed": false,
       "avgPrice": null,
@@ -1596,7 +1909,7 @@
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1629,12 +1942,12 @@
       "dishes": [
         {
           "name": "草莓奶皮子",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1667,7 +1980,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2026-02",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1675,72 +1988,6 @@
       "amapQuery": "%E5%B1%B1%E5%87%A4%E5%87%B0%20%E5%B9%BF%E5%B7%9E%20%E7%95%AA%E7%A6%BA",
       "lng": 113.348233,
       "lat": 23.003281,
-      "coordSystem": "GCJ02",
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_c25f71b1",
-      "slug": "婶婶铺泡菜粉-南山",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "婶婶铺泡菜粉",
-      "branch": "南山",
-      "category": null,
-      "cuisineTags": [
-        "川菜"
-      ],
-      "reviewText": "吃了不下50次吧 夯完了",
-      "dishes": [],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-02",
-      "visitedAtPrecision": "month",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E5%A9%B6%E5%A9%B6%E9%93%BA%E6%B3%A1%E8%8F%9C%E7%B2%89%20%E6%B7%B1%E5%9C%B3%20%E5%8D%97%E5%B1%B1",
-      "lng": null,
-      "lat": null,
-      "coordSystem": null,
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
-    },
-    {
-      "id": "r_6acad1bb",
-      "slug": "喜上鸽-罗湖",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "喜上鸽",
-      "branch": "罗湖",
-      "category": null,
-      "cuisineTags": [
-        "粤菜"
-      ],
-      "reviewText": "✅第一次吃到我觉得完全没有腥味怪味的鸽子，盐焗+红烧都可以 纯香\n✅红葱头鸡\n\n❌扇贝粉丝 性价比低了\n\n肥牛juejue煲 好吃但小贵 可以一试",
-      "dishes": [],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2026-02",
-      "visitedAtPrecision": "month",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E5%96%9C%E4%B8%8A%E9%B8%BD%20%E6%B7%B1%E5%9C%B3%20%E7%BD%97%E6%B9%96",
-      "lng": 114.126228,
-      "lat": 22.539963,
       "coordSystem": "GCJ02",
       "poiConfidence": null,
       "closed": false,
@@ -1766,12 +2013,12 @@
       "dishes": [
         {
           "name": "葱油鸡",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-11",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1791,66 +2038,32 @@
           "src": "images/r/r_4b0af625/cover.webp",
           "thumb": "images/r/r_4b0af625/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_4b0af625/p1.webp",
           "thumb": "images/r/r_4b0af625/p1-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_4b0af625/p2.webp",
           "thumb": "images/r/r_4b0af625/p2-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_4b0af625/p3.webp",
           "thumb": "images/r/r_4b0af625/p3-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_4b0af625/cover.webp"
-    },
-    {
-      "id": "r_5cd1bbca",
-      "slug": "客家本色",
-      "regionSlug": "shenzhen",
-      "actualCity": "深圳",
-      "brand": "客家本色",
-      "branch": null,
-      "category": null,
-      "cuisineTags": [
-        "客家菜"
-      ],
-      "reviewText": "古法盐焗鸡 客家菜唯爱这个",
-      "dishes": [
-        {
-          "name": "古法盐焗鸡",
-          "score10": 9.2
-        }
-      ],
-      "score10": null,
-      "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
-      "visitedAt": "2025-10",
-      "visitedAtPrecision": "month",
-      "inRecent": false,
-      "multiShop": false,
-      "amapQuery": "%E5%AE%A2%E5%AE%B6%E6%9C%AC%E8%89%B2%20%E6%B7%B1%E5%9C%B3",
-      "lng": null,
-      "lat": null,
-      "coordSystem": null,
-      "poiConfidence": null,
-      "closed": false,
-      "avgPrice": null,
-      "branches": [],
-      "address": "",
-      "contentUpdatedAt": "2026-10-21",
-      "images": [],
-      "coverImage": null
     },
     {
       "id": "r_89bd498c",
@@ -1867,17 +2080,77 @@
       "dishes": [
         {
           "name": "古法盐焗鸡",
-          "score10": 9.2
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-10",
       "visitedAtPrecision": "month",
       "inRecent": false,
       "multiShop": false,
       "amapQuery": "%E7%A7%8B%E8%89%B2%E5%AE%A2%E5%AE%B6%E8%8F%9C%20%E6%B7%B1%E5%9C%B3%20%E5%AE%9D%E5%AE%89",
+      "lng": null,
+      "lat": null,
+      "coordSystem": null,
+      "poiConfidence": null,
+      "closed": false,
+      "avgPrice": null,
+      "branches": [],
+      "address": "",
+      "contentUpdatedAt": "2026-10-21",
+      "images": [
+        {
+          "src": "images/r/r_89bd498c/cover.webp",
+          "thumb": "images/r/r_89bd498c/cover-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_89bd498c/p1.webp",
+          "thumb": "images/r/r_89bd498c/p1-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_89bd498c/p2.webp",
+          "thumb": "images/r/r_89bd498c/p2-400.webp",
+          "w": 1600,
+          "h": 1600,
+          "pos": "50% 50%"
+        }
+      ],
+      "coverImage": "images/r/r_89bd498c/cover.webp"
+    },
+    {
+      "id": "r_5cd1bbca",
+      "slug": "客家本色",
+      "regionSlug": "shenzhen",
+      "actualCity": "深圳",
+      "brand": "客家本色",
+      "branch": null,
+      "category": null,
+      "cuisineTags": [
+        "客家菜"
+      ],
+      "reviewText": "古法盐焗鸡 客家菜唯爱这个",
+      "dishes": [
+        {
+          "name": "古法盐焗鸡",
+          "score10": null
+        }
+      ],
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "tbd",
+      "visitedAt": "2025-10",
+      "visitedAtPrecision": "month",
+      "inRecent": false,
+      "multiShop": false,
+      "amapQuery": "%E5%AE%A2%E5%AE%B6%E6%9C%AC%E8%89%B2%20%E6%B7%B1%E5%9C%B3",
       "lng": null,
       "lat": null,
       "coordSystem": null,
@@ -1905,12 +2178,12 @@
       "dishes": [
         {
           "name": "炒饭和汤",
-          "score10": 9
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-09",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1943,12 +2216,12 @@
       "dishes": [
         {
           "name": "土豆丝 肥肠 辣子鸡",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-09",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -1981,7 +2254,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-09",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2014,12 +2287,12 @@
       "dishes": [
         {
           "name": "烧肉",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-08",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2039,13 +2312,15 @@
           "src": "images/r/r_56ae5990/cover.webp",
           "thumb": "images/r/r_56ae5990/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_56ae5990/p1.webp",
           "thumb": "images/r/r_56ae5990/p1-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_56ae5990/cover.webp"
@@ -2065,12 +2340,12 @@
       "dishes": [
         {
           "name": "香油鸡和捞粉",
-          "score10": 9.2
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-08",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2103,12 +2378,12 @@
       "dishes": [
         {
           "name": "冒烤鸭",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2025-08",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2141,12 +2416,12 @@
       "dishes": [
         {
           "name": "烤肉",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2166,7 +2441,8 @@
           "src": "images/r/r_850519c6/cover.webp",
           "thumb": "images/r/r_850519c6/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_850519c6/cover.webp"
@@ -2186,12 +2462,12 @@
       "dishes": [
         {
           "name": "咖喱牛肉",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2211,7 +2487,8 @@
           "src": "images/r/r_3fd0194e/cover.webp",
           "thumb": "images/r/r_3fd0194e/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_3fd0194e/cover.webp"
@@ -2231,12 +2508,12 @@
       "dishes": [
         {
           "name": "脆皮鸡",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2269,12 +2546,12 @@
       "dishes": [
         {
           "name": "牛肋骨汤",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2307,7 +2584,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2024-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2340,12 +2617,12 @@
       "dishes": [
         {
           "name": "寿喜烧",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2365,19 +2642,22 @@
           "src": "images/r/r_8c01a7b8/cover.webp",
           "thumb": "images/r/r_8c01a7b8/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_8c01a7b8/p1.webp",
           "thumb": "images/r/r_8c01a7b8/p1-400.webp",
           "w": 1600,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_8c01a7b8/p2.webp",
           "thumb": "images/r/r_8c01a7b8/p2-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_8c01a7b8/cover.webp"
@@ -2397,12 +2677,12 @@
       "dishes": [
         {
           "name": "蛋和红薯泥",
-          "score10": 9
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2422,13 +2702,15 @@
           "src": "images/r/r_fd9722d5/cover.webp",
           "thumb": "images/r/r_fd9722d5/cover-400.webp",
           "w": 1200,
-          "h": 1600
+          "h": 1600,
+          "pos": "50% 50%"
         },
         {
           "src": "images/r/r_fd9722d5/p1.webp",
           "thumb": "images/r/r_fd9722d5/p1-400.webp",
           "w": 1600,
-          "h": 1200
+          "h": 1200,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_fd9722d5/cover.webp"
@@ -2448,12 +2730,12 @@
       "dishes": [
         {
           "name": "普洱",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2486,7 +2768,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2519,7 +2801,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2552,12 +2834,12 @@
       "dishes": [
         {
           "name": "鹅肝",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2590,7 +2872,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2623,12 +2905,12 @@
       "dishes": [
         {
           "name": "火锅",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2661,12 +2943,12 @@
       "dishes": [
         {
           "name": "火锅",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2699,7 +2981,7 @@
       "dishes": [],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2732,12 +3014,12 @@
       "dishes": [
         {
           "name": "T45果酿",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -2770,12 +3052,12 @@
       "dishes": [
         {
           "name": "绿咖喱",
-          "score10": 9.4
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -3076,9 +3358,9 @@
           "score10": null
         }
       ],
-      "score10": 8,
-      "scoreScope": "restaurant",
-      "recommendationLevel": "yingChiBang",
+      "score10": null,
+      "scoreScope": "none",
+      "recommendationLevel": "s1",
       "visitedAt": "2026-05-09",
       "visitedAtPrecision": "day",
       "inRecent": false,
@@ -3111,12 +3393,12 @@
       "dishes": [
         {
           "name": "黑松露炒饭",
-          "score10": 9.6
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,
@@ -3149,12 +3431,12 @@
       "dishes": [
         {
           "name": "牛肋条",
-          "score10": 9.2
+          "score10": null
         }
       ],
       "score10": null,
       "scoreScope": "none",
-      "recommendationLevel": "keyiChi",
+      "recommendationLevel": "tbd",
       "visitedAt": "2023-12",
       "visitedAtPrecision": "month",
       "inRecent": false,

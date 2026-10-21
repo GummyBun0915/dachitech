@@ -7,7 +7,7 @@
  */
 import Layout from "../components/Layout.astro";
 import RestaurantRow from "../components/RestaurantRow.astro";
-import { REGION_ORDER, regionName, byRegion, isEaten, branchNavUrl, navUrl, type PubRestaurant } from "../lib/food-data";
+import { REGION_ORDER, regionName, byRegion, isEaten, branchNavUrl, navUrl, GUIDE_ORDER, LEVEL_LABEL, starCount, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf, CUISINE_GROUP_ORDER } from "../lib/cuisine";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -21,7 +21,7 @@ const list = byRegion(region);
 const eatenCount = list.filter(isEaten).length;
 const waitCount = list.length - eatenCount;
 const subLine = eatenCount > 0
-  ? `${eatenCount} 家实吃${waitCount > 0 ? ` · ${waitCount} 家待吃` : ""}`
+  ? `实吃 ${eatenCount} 家${waitCount > 0 ? ` · ${waitCount} 家待吃` : ""}`
   : waitCount > 0 ? `暂无实吃 · ${waitCount} 家待吃` : "还没有记录";
 
 // 地图规则（用户 2026-10-20）：中国一律高德、海外不加载高德
@@ -41,14 +41,17 @@ function amapCfg() {
 const amap = overseas ? null : amapCfg();
 
 const groups = CUISINE_GROUP_ORDER.filter((g) => list.some((r) => cuisineGroupsOf(r.cuisineTags).includes(g)));
-const LEVELS = ([["wubiChi", "务必吃"], ["yingChiBang", "应吃榜"], ["keyiChi", "可以吃"], ["daiChi", "待吃"]] as const)
-  .filter(([k]) => list.some((r) => r.recommendationLevel === k));
+// 人均档（用户 2026-10-21）：只列有店落入的档；没填人均的店在选价格档时不显示（行内提示）
+const PRICE_BANDS = [["lt80", "¥80 以下", 0, 80], ["80-150", "¥80–150", 80, 150], ["gt150", "¥150 以上", 150, Infinity]] as const;
+const priced = list.filter((r) => r.avgPrice);
+const bands = PRICE_BANDS.map(([k, l, lo, hi]) => ({ k, l, lo, hi, n: priced.filter((r) => r.avgPrice! >= lo && r.avgPrice! < hi).length })).filter((b) => b.n > 0);
+const LEVELS = GUIDE_ORDER.filter((k) => list.some((r) => r.recommendationLevel === k)).map((k) => [k, LEVEL_LABEL[k]] as const);
 
 // 每家店的点位（单店 1 个；多门店每家有坐标的门店各 1 个，导航到各自门店）
 const pts = (r: PubRestaurant) => r.branches.length > 1
   ? r.branches.filter((b) => b.lng !== null && b.lat !== null).map((b) => [b.lng, b.lat, b.name, branchNavUrl(r, b)])
   : r.lng !== null && r.lat !== null ? [[r.lng, r.lat, r.branch ?? "", navUrl(r)]] : [];
-const mapData = list.map((r) => ({ id: r.id, level: r.closed ? "closed" : r.recommendationLevel, score: r.score10, pts: pts(r) }));
+const mapData = list.map((r) => ({ id: r.id, name: r.brand, level: r.closed ? "closed" : r.recommendationLevel, pts: pts(r) }));
 const withCoords = mapData.filter((d) => d.pts.length).length;
 const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
 ---
@@ -66,16 +69,19 @@ const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
             <h1 class="bar-title">{name} <span class="num" data-count>{list.length}</span><span class="bar-unit"> 家</span></h1>
             <input class="bar-q" type="search" placeholder="搜店名 / 菜" aria-label="搜索店名或菜名" data-q />
             <select class="bar-sort" data-sort aria-label="排序">
-              <option value="score">按分数</option>
+              <option value="score">按星级</option>
               <option value="recent">最近吃</option>
               <option value="dist">离我最近</option>
             </select>
           </div>
           <div class="chips" role="group" aria-label="筛选">
-            {LEVELS.map(([k, l]) => <button type="button" class="chip" data-f-level={k} aria-pressed="false">{l}</button>)}
+            {LEVELS.map(([k, l]) => <button type="button" class:list={["chip", `chip--${k}`]} data-f-level={k} aria-pressed="false" title={l}>{starCount(k) ? <span class="chip-star" aria-label={l}>{"★".repeat(starCount(k))}</span> : l}</button>)}
+            {bands.length > 0 && <span class="chip-sep" aria-hidden="true"></span>}
+            {bands.map((b) => <button type="button" class="chip" data-f-price={b.k} data-lo={b.lo} data-hi={b.hi === Infinity ? "" : b.hi} aria-pressed="false">{b.l}<span class="chip-n num">{b.n}</span></button>)}
             {groups.length > 1 && <span class="chip-sep" aria-hidden="true"></span>}
             {groups.length > 1 && groups.map((g) => <button type="button" class="chip" data-f-cat={g} aria-pressed="false">{g}</button>)}
           </div>
+          {bands.length > 0 && <p class="price-note" data-price-note hidden>只显示填了人均的 {priced.length} 家（共 {list.length} 家）</p>}
           {withCoords > 0 && <label class="bar-bounds"><input type="checkbox" data-bounds /> 只看地图范围内</label>}
         </div>
         <p class="sub-line">{subLine}</p>
@@ -89,7 +95,18 @@ const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
         <div class="map" data-map></div>
         <div class="map-msg" data-map-msg hidden></div>
         {withCoords > 0 && <button type="button" class="map-btn map-locate" data-locate aria-label="定位到我">◎</button>}
-        {withCoords > 0 && <button type="button" class="map-btn map-reset" data-reset>查看全部</button>}
+        {withCoords > 0 && (
+          <div class="map-top">
+            <button type="button" class="map-btn map-reset" data-reset>查看全部</button>
+            <ul class="map-legend" aria-label="图例">
+              <li><i class="lg lg--star">★</i>星级</li>
+              <li><i class="lg lg--bib"></i>必吃登</li>
+              <li><i class="lg lg--sel"></i>星选</li>
+              {waitCount > 0 && <li><i class="lg lg--daiChi"></i>待吃</li>}
+              <li><i class="lg lg--ck">3</i>附近几家</li>
+            </ul>
+          </div>
+        )}
       </section>
 
       <button type="button" class="fab" data-fab aria-pressed="false">地图</button>
@@ -119,6 +136,11 @@ const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
   .chip { flex: none; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 16px; font-size: 13px; font-weight: 550; color: var(--ink-2); background: var(--paper); }
   .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
   .chip-sep { flex: 0 0 1px; background: var(--line); margin: 4px 2px; }
+  .chip-star { color: var(--star); letter-spacing: -1px; font-size: 13px; }
+  .chip[aria-pressed="true"] .chip-star { color: #ff8a9b; }
+  .chip-n { margin-left: 4px; font-size: 11px; opacity: 0.6; }
+  .price-note { font-size: 12px; color: #9a5a12; }
+  .price-note[hidden] { display: none; }
   .bar-bounds { display: none; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); }
   .sub-line { padding: 8px 16px 0; font-size: 12px; color: var(--ink-3); }
   .items { list-style: none; margin: 0; padding: 0 0 96px; }
@@ -132,7 +154,18 @@ const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
   .map-msg[hidden] { display: none; }
   .map-btn { position: absolute; z-index: 500; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 4px rgba(18, 18, 22, 0.15); color: var(--ink); }
   .map-locate { right: 12px; bottom: 24px; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; }
-  .map-reset { left: 12px; top: 12px; height: 34px; padding: 0 12px; border-radius: var(--r-chip); font-size: 13px; font-weight: 600; }
+  .map-top { position: absolute; left: 12px; right: 56px; top: 12px; z-index: 500; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; pointer-events: none; }
+  .map-top > * { pointer-events: auto; }
+  .map-reset { position: static; height: 32px; padding: 0 12px; border-radius: var(--r-chip); font-size: 13px; font-weight: 600; }
+  .map-legend { list-style: none; margin: 0; padding: 0 10px; height: 32px; display: flex; gap: 10px; align-items: center; background: rgba(255, 255, 255, 0.94); border: 1px solid var(--line); border-radius: var(--r-chip); font-size: 12px; color: var(--ink-2); box-shadow: 0 1px 4px rgba(18, 18, 22, 0.12); white-space: nowrap; }
+  .map-legend li { display: flex; align-items: center; gap: 4px; }
+  .lg { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid; }
+  .lg--star { width: auto; height: auto; border: 0; border-radius: 0; color: var(--star); font-style: normal; font-size: 12px; line-height: 1; }
+  .lg--bib { background: var(--bib); border-color: var(--bib); }
+  .lg--sel { background: #fff; border-color: var(--ink-2); }
+  .lg--daiChi { background: #fbf1e2; border-color: #d98a1f; }
+  .lg--ck { width: 16px; height: 16px; display: grid; place-items: center; font: 700 9px/1 var(--font-mono); color: var(--ink); background: #fff; border: 2px solid var(--ink-2); font-style: normal; }
+  @media (max-width: 420px) { .map-legend { gap: 7px; padding: 0 8px; font-size: 11px; } }
 
   /* ---------- 手机 / 平板：列表为主，FAB 切全屏地图 ---------- */
   @media (max-width: 1023px) {
@@ -163,14 +196,39 @@ const mapCfg = { provider: overseas ? "osm" : "amap", amap, withCoords };
 
 <style is:global>
   /* 地图 pin / 聚合 / 信息窗：在地图容器内，需全局作用域（高德与 Leaflet 共用） */
-  .pin { display: grid; place-items: center; min-width: 30px; height: 22px; padding: 0 6px; border-radius: 11px; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink-2); font: 700 11px/1 var(--font-mono); box-shadow: 0 1px 3px rgba(18, 18, 22, 0.25); transform: translate(-50%, -50%); white-space: nowrap; cursor: pointer; transition: transform var(--t); }
-  .pin--wubiChi { background: var(--level-wubi); border-color: var(--level-wubi); color: #fff; }
-  .pin--yingChiBang { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .pin--daiChi { background: #fbf1e2; border-color: #d98a1f; color: #9a5a12; }
-  .pin--closed { background: var(--paper-2); border-color: var(--line); color: var(--ink-3); }
-  .pin.is-on { transform: translate(-50%, -50%) scale(1.3); outline: 3px solid var(--op); }
+  /* 地图标记（用户 2026-10-21 要求深度优化）：
+     店 = 带尖角的「分数气泡」，尖角落在店的真实位置；颜色 = 榜单；无分数的实吃店用刀叉图标，待吃写「待吃」。
+     聚合 = 白底圆 + 外环（环色 = 组内最高档）+「N 家」，形状与店气泡明显不同，不会被误读成分数。
+     放大到街道级（≥15）或选中时，气泡旁带店名。 */
+  .mk { position: relative; display: inline-flex; align-items: center; gap: 4px; height: 26px; padding: 0 8px; border-radius: 13px;
+    background: #fff; color: var(--ink); border: 1.5px solid var(--ink-2); box-shadow: 0 2px 6px rgba(18, 18, 22, 0.22);
+    font: 700 12px/1 var(--font-mono); white-space: nowrap; cursor: pointer; transform: translate(-50%, calc(-100% - 7px)); transform-origin: 50% calc(100% + 7px); transition: transform var(--t); }
+  .mk::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 10px; height: 10px; background: inherit; border: inherit; border-top: 0; border-left: 0;
+    transform: translateX(-50%) rotate(45deg); border-radius: 0 0 2px 0; margin-bottom: 2px; }
+  .mk svg { width: 13px; height: 13px; }
+  .mk-n { font: 600 12px/1 var(--font-sans); letter-spacing: 0; max-width: 9em; overflow: hidden; text-overflow: ellipsis; display: none; }
+  .mk.with-name .mk-n, .mk.is-on .mk-n { display: inline; }
+  .mk.with-name .mk-n::before, .mk.is-on .mk-n::before { content: ""; display: inline-block; width: 1px; height: 11px; margin-right: 5px; background: currentColor; opacity: 0.35; vertical-align: -1px; }
+  .mk--s1, .mk--s2, .mk--s3 { border-color: var(--star); color: var(--star); padding: 0 6px; }
+  .mk--s3 { background: var(--star); color: #fff; }
+  .mk-st { display: inline-flex; gap: 0; }
+  .mk-st svg { width: 12px; height: 12px; fill: currentColor; }
+  .mk--bib { border-color: var(--bib); color: var(--bib); padding: 0 6px; }
+  .mk-bib { display: inline-block; width: 13px; height: 13px; border-radius: 50%; background: var(--bib); position: relative; }
+  .mk-bib::after { content: ""; position: absolute; left: 3px; right: 3px; top: 6px; height: 3px; border: 1.5px solid #fff; border-top: 0; border-radius: 0 0 4px 4px; }
+  .mk--sel { color: var(--ink-2); padding: 0 6px; }
+  .mk--tbd { color: var(--ink-3); border-color: var(--ink-3); border-style: dashed; padding: 0 6px; height: 22px; }
+  .mk--daiChi { background: #fbf1e2; border-color: #d98a1f; color: #9a5a12; font-family: var(--font-sans); font-size: 11px; }
+  .mk--closed { background: var(--paper-2); border-color: var(--line); color: var(--ink-3); }
+  .mk:hover { transform: translate(-50%, calc(-100% - 7px)) scale(1.08); }
+  .mk.is-on { transform: translate(-50%, calc(-100% - 7px)) scale(1.18); box-shadow: 0 0 0 3px rgba(36, 81, 230, 0.35), 0 4px 10px rgba(18, 18, 22, 0.3); }
+  .ck { display: grid; place-items: center; width: var(--d, 38px); height: var(--d, 38px); border-radius: 50%; background: #fff; color: var(--ink);
+    border: 3px solid var(--ring, var(--ink-2)); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.55), 0 2px 6px rgba(18, 18, 22, 0.25);
+    transform: translate(-50%, -50%); cursor: pointer; line-height: 1; text-align: center; transition: transform var(--t); }
+  .ck b { font: 700 14px/1 var(--font-mono); display: block; }
+  .ck small { font-size: 9px; color: var(--ink-2); display: block; margin-top: 1px; }
+  .ck:hover { transform: translate(-50%, -50%) scale(1.08); }
   .pin-wrap { background: none; border: 0; }
-  .cluster { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--op); color: #fff; font: 700 13px/1 var(--font-mono); border: 2px solid #fff; box-shadow: 0 1px 4px rgba(18, 18, 22, 0.3); transform: translate(-50%, -50%); cursor: pointer; }
   .map-pop { position: relative; padding: 10px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-overlay); box-shadow: 0 6px 20px rgba(18, 18, 22, 0.16); font-family: var(--font-sans); }
   .leaflet-popup-content-wrapper { border-radius: var(--r-overlay); }
   .leaflet-popup-content { margin: 10px 12px; font-family: var(--font-sans); }

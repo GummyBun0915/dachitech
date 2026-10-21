@@ -1,9 +1,9 @@
 ---
 import "../styles/global.css";
-import { REGION_ORDER, regionName, regionCount, regionPath, homePath, lastUpdated } from "../lib/food-data";
+import { REGION_ORDER, regionName, regionCount, regionWait, regionPath, homePath, lastUpdated } from "../lib/food-data";
 
 interface Props { title?: string; description?: string }
-const { title = "大吃特吃", description = "深圳及其他地方的本人实吃记录。" } = Astro.props;
+const { title = "大吃特吃", description = "星其林 · 私人美食指南。只写亲口吃过的店，深圳为主，走到哪吃到哪。" } = Astro.props;
 const updated = lastUpdated();
 const here = Astro.url.pathname;
 ---
@@ -22,7 +22,7 @@ const here = Astro.url.pathname;
       <nav class="region-nav" aria-label="地区">
         {REGION_ORDER.map((s) => (
           <a class:list={["region-link", { on: here.startsWith(`${homePath}${s}`) }]} href={regionPath(s)}>
-            {regionName(s)}<span class="num cnt">{regionCount(s)}</span>
+            {regionName(s)}<span class="num cnt">{regionCount(s) + regionWait(s)}</span>
           </a>
         ))}
       </nav>
@@ -31,7 +31,7 @@ const here = Astro.url.pathname;
   <main><slot /></main>
   <footer class="site-footer">
     <div class="page footer-row">
-      <span>大吃特吃 · 深圳及其他地方的本人实吃记录。</span>
+      <span>大吃特吃 · 星其林指南 · 只收录亲口吃过的店</span>
       {updated && <span>最后更新 <span class="num">{updated}</span></span>}
     </div>
   </footer>

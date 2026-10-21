@@ -12,7 +12,11 @@
   --brand-soft: #e8faff;
   --op: #2451e6;             /* 操作区蓝：筛选选中/链接/地图控件 */
   --op-soft: #eef2ff;
-  --level-wubi: #4a17b0;     /* 全站唯一强调色：务必吃 */
+  --level-wubi: #4a17b0;     /* 旧「务必吃」紫，星其林后不再用于级别 */
+  --star: #b3122e;           /* 星其林红：星级 */
+  --star-soft: #fff4f5;
+  --bib: #c2410c;            /* 必吃登橙 */
+  --bib-soft: #fff7ed;
   --dark: #121216;           /* 深色换气块 */
 
   /* 字 */

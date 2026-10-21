@@ -1,13 +1,13 @@
 ---
 import Layout from "../../components/Layout.astro";
-import { restaurants, regionName, fmtScore, fmtVisited, fmtPrice, asset, galleryData, navUrl, branchNavUrl, navProvider, LEVEL_LABEL, regionPath, type PubRestaurant } from "../../lib/food-data";
+import GuideBadge from "../../components/GuideBadge.astro";
+import { restaurants, regionName, fmtVisited, fmtPrice, asset, galleryData, navUrl, branchNavUrl, navProvider, regionPath, type PubRestaurant } from "../../lib/food-data";
 
 export function getStaticPaths() {
   return restaurants.map((r) => ({ params: { region: r.regionSlug, slug: r.slug }, props: { r } }));
 }
 interface Props { r: PubRestaurant }
 const { r } = Astro.props;
-const score = fmtScore(r.score10);
 const visited = fmtVisited(r);
 const title = `${r.brand}${r.branch ? " · " + r.branch : ""}`;
 const price = fmtPrice(r);
@@ -25,14 +25,14 @@ const multi = r.branches.length > 1;
     {r.images.length > 0 ? (
       <div class="gallery" data-gallery={galleryData(r)}>
         <button type="button" class="g-cover" data-shot="0" aria-label={`查看大图：${r.brand}，共 ${r.images.length} 张`}>
-          <img src={asset(r.images[0].src)} srcset={`${asset(r.images[0].thumb)} 400w, ${asset(r.images[0].src)} 1600w`}
+          <img src={asset(r.images[0].src)} style={`object-position:${r.images[0].pos}`} srcset={`${asset(r.images[0].thumb)} 400w, ${asset(r.images[0].src)} 1600w`}
             sizes="(min-width: 800px) 760px, 100vw" width={r.images[0].w} height={r.images[0].h} alt={`${r.brand}实拍`} />
         </button>
         {r.images.length > 1 && (
           <div class="g-grid">
             {r.images.slice(1).map((im, i) => (
               <button type="button" class="g-shot" data-shot={i + 1} aria-label={`查看大图：第 ${i + 2} 张`}>
-                <img src={asset(im.thumb)} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
+                <img src={asset(im.thumb)} style={`object-position:${im.pos}`} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
               </button>
             ))}
           </div>
@@ -46,17 +46,12 @@ const multi = r.branches.length > 1;
     <header class="d-head">
       <h1 class="d-name">{r.brand}{r.branch && <span class="d-branch"> · {r.branch}</span>}</h1>
       <div class="d-tags">
-        {r.closed
-          ? <span class="tag tag--closed">已关店</span>
-          : <span class:list={["tag", { "tag--wubi": r.recommendationLevel === "wubiChi", "tag--fill": r.recommendationLevel === "yingChiBang", "tag--dai": r.recommendationLevel === "daiChi" }]}>
-              {LEVEL_LABEL[r.recommendationLevel]}
-            </span>}
+        <GuideBadge level={r.recommendationLevel} closed={r.closed} size="lg" />
         {r.cuisineTags.map((c) => <span class="tag">{c}</span>)}
       </div>
-      {(score || price) && (
+      {price && (
         <p class="d-score">
-          {score && <span class="num">{score}</span>}
-          {price && <span class="d-price">人均 <span class="num">{price.replace("/人", "")}</span></span>}
+          <span class="d-price">人均 <span class="num">{price.replace("/人", "")}</span></span>
         </p>
       )}
       {r.reviewText && <p class="d-review">{r.reviewText}</p>}
@@ -69,7 +64,6 @@ const multi = r.branches.length > 1;
           {r.dishes.map((d) => (
             <li class="dish">
               <span class="dish-name">{d.name}</span>
-              {d.score10 != null && <span class="num dish-score">{fmtScore(d.score10)}</span>}
               {d.review && <p class="dish-review">{d.review}</p>}
             </li>
           ))}
@@ -86,7 +80,7 @@ const multi = r.branches.length > 1;
               <div class="go-text">
                 <p class="go-addr">{b.name || r.brand}{b.closed && <span class="go-flag"> · 已关店</span>}</p>
                 {b.address && <p class="go-sub">{b.address}</p>}
-                {b.visitedAt && <p class="go-sub">实吃 <span class="num">{b.visitedAt.replaceAll("-", ".")}</span>{b.score10 != null && <> · <span class="num">{fmtScore(b.score10)}</span></>}</p>}
+                {b.visitedAt && <p class="go-sub">实吃 <span class="num">{b.visitedAt.replaceAll("-", ".")}</span></p>}
               </div>
               <a class="go-btn go-btn--sm" href={branchNavUrl(r, b)} target="_blank" rel="noopener noreferrer">导航</a>
             </li>

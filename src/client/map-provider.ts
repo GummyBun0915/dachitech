@@ -17,6 +17,7 @@ export interface MapApi {
   closePopup(): void;
   on(evt: "zoomend" | "moveend" | "click", fn: () => void): void;
   resize(): void;
+  zoom(): number;
   /** 「我的位置」小圆点；坐标已是本底图坐标系 */
   me(at: LngLat): void;
 }
@@ -74,6 +75,7 @@ export async function createAmap(el: HTMLElement, key: string, security: string,
     closePopup() { info.close(); },
     on(evt, fn) { map.on(evt, fn); },
     resize() { map.resize?.(); },
+    zoom() { return map.getZoom(); },
     me(at) { new AMap.CircleMarker({ center: at, radius: 7, strokeColor: "#fff", strokeWeight: 2, fillColor: "#2451e6", fillOpacity: 1, zIndex: 300 }).setMap(map); },
   };
 }
@@ -107,6 +109,7 @@ export async function createOsm(el: HTMLElement): Promise<MapApi> {
     closePopup() { map.closePopup(); },
     on(evt, fn) { map.on(evt, fn); },
     resize() { map.invalidateSize(); },
+    zoom() { return map.getZoom(); },
     me(at) { L.circleMarker(ll(at), { radius: 7, color: "#fff", weight: 2, fillColor: "#2451e6", fillOpacity: 1 }).addTo(map); },
   };
 }

@@ -4,11 +4,11 @@
  * 左 92px 方图（点开灯箱看全部高清）· 中 名/分/榜单/品类/人均/一句话 · 右 导航。
  * 行本身可点 → 地图定位（由 city.ts 处理）；链接与按钮各管各的。
  */
-import { fmtScore, fmtPrice, fmtVisited, LEVEL_LABEL, detailPath, navUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
+import GuideBadge from "./GuideBadge.astro";
+import { fmtPrice, fmtVisited, detailPath, navUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf } from "../lib/cuisine";
 interface Props { r: PubRestaurant; i: number }
 const { r, i } = Astro.props;
-const score = fmtScore(r.score10);
 const price = fmtPrice(r);
 const visited = fmtVisited(r);
 const n = r.images.length;
@@ -17,10 +17,10 @@ const hay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.cui
 ---
 <li class:list={["it", { "it--closed": r.closed }]}
   data-id={r.id} data-i={i} data-level={r.recommendationLevel}
-  data-cats={cuisineGroupsOf(r.cuisineTags).join("|")} data-visited={r.visitedAt ?? ""} data-hay={hay}>
+  data-cats={cuisineGroupsOf(r.cuisineTags).join("|")} data-visited={r.visitedAt ?? ""} data-price={r.avgPrice ?? ""} data-hay={hay}>
   {n > 0 ? (
     <button type="button" class="it-img" data-gallery={galleryData(r)} data-shot="0" aria-label={`看 ${r.brand} 的实拍大图，共 ${n} 张`}>
-      <img src={asset(r.images[0].thumb)} width="92" height="92" alt="" loading={i < 6 ? "eager" : "lazy"} decoding="async" />
+      <img src={asset(r.images[0].thumb)} style={`object-position:${r.images[0].pos}`} width="92" height="92" alt="" loading={i < 6 ? "eager" : "lazy"} decoding="async" />
       {n > 1 && <span class="it-n num">{n}</span>}
     </button>
   ) : (
@@ -29,8 +29,7 @@ const hay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.cui
   <div class="it-text">
     <h2 class="it-h"><a class="it-name" href={detailPath(r)}>{r.brand}{!multi && r.branch && <span class="it-branch"> · {r.branch}</span>}</a></h2>
     <p class="it-line">
-      {score && <b class="num it-score">{score.replace("/10", "")}</b>}
-      <span class:list={["it-lv", `lv-${r.closed ? "closed" : r.recommendationLevel}`]}>{r.closed ? "已关店" : LEVEL_LABEL[r.recommendationLevel]}</span>
+      <GuideBadge level={r.recommendationLevel} closed={r.closed} />
       {r.cuisineTags.length > 0 && <span class="it-cui">{r.cuisineTags.slice(0, 2).join(" · ")}</span>}
       {price && <span class="num it-price">{price.replace("/人", "")}</span>}
     </p>
@@ -63,12 +62,6 @@ const hay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ...r.cui
   .it-name { color: var(--ink); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .it-branch { font-weight: 500; color: var(--ink-2); font-size: 13px; }
   .it-line { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 6px; font-size: 12.5px; color: var(--ink-2); }
-  .it-score { font-size: 14px; color: var(--ink); }
-  .it-lv { font-size: 11px; font-weight: 650; padding: 0 6px; border-radius: 4px; line-height: 18px; border: 1px solid var(--line); }
-  .lv-wubiChi { background: var(--level-wubi); border-color: var(--level-wubi); color: #fff; }
-  .lv-yingChiBang { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .lv-daiChi { background: #fbf1e2; border-color: #e6c48f; color: #9a5a12; }
-  .lv-closed { background: var(--paper-2); color: var(--ink-3); }
   .it-price { color: var(--ink); font-weight: 600; }
   .it-sub { font-size: 12.5px; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .it-foot { display: flex; gap: 8px; font-size: 11.5px; color: var(--ink-3); }

@@ -1,10 +1,10 @@
 ---
-import { fmtScore, fmtVisited, fmtPrice, LEVEL_LABEL, detailPath, navUrl, branchNavUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
+import GuideBadge from "./GuideBadge.astro";
+import { fmtVisited, fmtPrice, detailPath, navUrl, branchNavUrl, navProvider, asset, galleryData, type PubRestaurant } from "../lib/food-data";
 import { cuisineGroupsOf } from "../lib/cuisine";
 /** variant：album = A 滑动相册（首页）；strip = B 封面 + 缩略条（城市页）。用户 2026-10-20 拍板 */
 interface Props { r: PubRestaurant; variant?: "album" | "strip" }
 const { r, variant = "strip" } = Astro.props;
-const score = fmtScore(r.score10);
 const visited = fmtVisited(r);
 const price = fmtPrice(r);
 const multi = r.branches.length > 1;
@@ -31,7 +31,7 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
       <div class="rc-track">
         {imgs.map((im, i) => (
           <button type="button" class="rc-slide" data-shot={i} aria-label={`查看大图：${r.brand} 第 ${i + 1} / ${n} 张`}>
-            <img src={asset(im.thumb)} srcset={`${asset(im.thumb)} 400w, ${asset(im.src)} 1600w`}
+            <img src={asset(im.thumb)} style={`object-position:${im.pos}`} srcset={`${asset(im.thumb)} 400w, ${asset(im.src)} 1600w`}
               sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
               width={im.w} height={im.h} alt={i === 0 ? `${r.brand}实拍` : ""} loading="lazy" decoding="async" />
           </button>
@@ -46,7 +46,7 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
   ) : n > 0 ? (
     <div class="rc-media rc-gal" data-gallery={galleryData(r)}>
       <button type="button" class="rc-cover" data-shot="0" aria-label={`查看大图：${r.brand}，共 ${n} 张`}>
-        <img src={asset(imgs[0].thumb)} srcset={`${asset(imgs[0].thumb)} 400w, ${asset(imgs[0].src)} 1600w`}
+        <img src={asset(imgs[0].thumb)} style={`object-position:${imgs[0].pos}`} srcset={`${asset(imgs[0].thumb)} 400w, ${asset(imgs[0].src)} 1600w`}
           sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw"
           width={imgs[0].w} height={imgs[0].h} alt={`${r.brand}实拍`} loading="lazy" decoding="async" />
         {n > 1 && n < 4 && <span class="rc-count num" aria-hidden="true">1 / {n}</span>}
@@ -56,7 +56,7 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
         <div class="rc-strip">
           {imgs.slice(1, 4).map((im, i) => (
             <button type="button" class="rc-shot" data-shot={i + 1} aria-label={`查看大图：${r.brand} 第 ${i + 2} 张`}>
-              <img src={asset(im.thumb)} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
+              <img src={asset(im.thumb)} style={`object-position:${im.pos}`} width={im.w} height={im.h} alt="" loading="lazy" decoding="async" />
               {i === 2 && n > 4 && <span class="rc-more num" aria-hidden="true">+{n - 4}</span>}
             </button>
           ))}
@@ -73,20 +73,14 @@ const searchHay = [r.brand, r.branch ?? "", ...r.branches.map((b) => b.name), ..
       <h3 class="rc-name">
         <a href={detailPath(r)}>{r.brand}{r.branch && <span class="rc-branch"> · {r.branch}</span>}</a>
       </h3>
-      {r.closed
-        ? <span class="tag tag--closed">已关店</span>
-        : <span class:list={["tag", { "tag--wubi": r.recommendationLevel === "wubiChi", "tag--fill": r.recommendationLevel === "yingChiBang", "tag--dai": r.recommendationLevel === "daiChi" }]}>
-            {LEVEL_LABEL[r.recommendationLevel]}
-          </span>}
+      <GuideBadge level={r.recommendationLevel} closed={r.closed} />
     </div>
     <div class="rc-meta">
       {r.cuisineTags.slice(0, 3).map((c) => <span class="rc-cuisine">{c}</span>)}
       {price && <span class="rc-price num">{price}</span>}
       {visited && <span class="rc-visited num">{visited}</span>}
     </div>
-    {score
-      ? <p class="rc-score"><span class="num">{score}</span>{r.reviewText && <span class="rc-review"> · {r.reviewText}</span>}</p>
-      : r.reviewText && <p class="rc-review">{r.reviewText}</p>}
+    {r.reviewText && <p class="rc-review">{r.reviewText}</p>}
     {r.dishes.length > 0 && (
       <p class="rc-dishes">推荐：{r.dishes.slice(0, 3).map((d) => d.name).join("、")}{r.dishes.length > 3 && ` 等${r.dishes.length}样`}</p>
     )}

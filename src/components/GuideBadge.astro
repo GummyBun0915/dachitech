@@ -1,0 +1,45 @@
+---
+/**
+ * 星其林标识：星级 = 1–3 颗自绘红星（不用米其林官方花形标志）；必吃登 = 橙色笑脸碗；其余为文字标签。
+ * size：sm（列表行 / 卡片）| lg（详情页，带含义说明）
+ */
+import { LEVEL_LABEL, LEVEL_MEANING, starCount, type GuideLevel } from "../lib/food-data";
+interface Props { level: GuideLevel; closed?: boolean; size?: "sm" | "lg" }
+const { level, closed = false, size = "sm" } = Astro.props;
+const n = starCount(level);
+---
+{closed ? (
+  <span class:list={["gb", "gb--closed", `gb--${size}`]}>已关店</span>
+) : (
+  <span class:list={["gb", `gb--${level}`, `gb--${size}`]} title={`${LEVEL_LABEL[level]} · ${LEVEL_MEANING[level]}`}>
+    {n > 0 ? (
+      <span class="gb-stars" role="img" aria-label={`星其林${LEVEL_LABEL[level]}`}>
+        {Array.from({ length: n }).map(() => (
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.95 6.2 6.8.8-5.05 4.65 1.35 6.75L12 17.2l-6.05 3.4 1.35-6.75L2.25 9.2l6.8-.8z" /></svg>
+        ))}
+      </span>
+    ) : level === "bib" ? (
+      <><i class="gb-bib" aria-hidden="true"></i>必吃登</>
+    ) : (
+      LEVEL_LABEL[level]
+    )}
+    {size === "lg" && <span class="gb-mean">{LEVEL_MEANING[level]}</span>}
+  </span>
+)}
+
+<style>
+  .gb { display: inline-flex; align-items: center; gap: 4px; flex: none; white-space: nowrap; border: 1px solid var(--line); border-radius: 11px; height: 22px; padding: 0 8px; font-size: 12px; font-weight: 650; color: var(--ink-2); background: var(--paper); letter-spacing: 0; }
+  .gb--lg { height: 30px; padding: 0 12px; border-radius: 15px; font-size: 14px; gap: 6px; }
+  .gb-stars { display: inline-flex; gap: 1px; }
+  .gb-stars svg { width: 14px; height: 14px; fill: var(--star); }
+  .gb--lg .gb-stars svg { width: 18px; height: 18px; }
+  .gb--s1, .gb--s2, .gb--s3 { border-color: var(--star); background: var(--star-soft); padding: 0 6px; }
+  .gb--bib { color: var(--bib); border-color: var(--bib); background: var(--bib-soft); }
+  .gb-bib { display: inline-block; width: 13px; height: 13px; border-radius: 50%; background: var(--bib); position: relative; flex: none; }
+  .gb-bib::after { content: ""; position: absolute; left: 3px; right: 3px; top: 6px; height: 3px; border: 1.5px solid #fff; border-top: 0; border-radius: 0 0 4px 4px; }
+  .gb--tbd { color: var(--ink-3); border-style: dashed; }
+  .gb--daiChi { background: #fbf1e2; border-color: #e6c48f; color: #9a5a12; }
+  .gb--closed { background: var(--paper-2); color: var(--ink-3); }
+  .gb-mean { font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+  .gb--s1 .gb-mean, .gb--s2 .gb-mean, .gb--s3 .gb-mean { color: var(--star); }
+</style>

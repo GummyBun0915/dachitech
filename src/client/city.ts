@@ -10,7 +10,7 @@
 import { createAmap, createOsm, wgs2gcj, type LngLat, type MapApi } from "./map-provider";
 
 type Pt = [number, number, string, string]; // lng, lat, 门店名, 导航链接
-type Rec = { id: string; level: string; score: number | null; pts: Pt[] };
+type Rec = { id: string; name: string; level: string; pts: Pt[] };
 type Cfg = { provider: "amap" | "osm"; amap: { key: string; security: string } | null; withCoords: number };
 
 const root = document.querySelector<HTMLElement>("[data-city]");
@@ -29,11 +29,14 @@ function init(root: HTMLElement) {
   const hoverable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   // ---------------- 筛选状态 ----------------
-  const f = { levels: new Set<string>(), cats: new Set<string>(), q: "", sort: "score", bounds: false };
+  const f = { levels: new Set<string>(), cats: new Set<string>(), prices: new Set<string>(), q: "", sort: "score", bounds: false };
   const qInput = root.querySelector<HTMLInputElement>("[data-q]")!;
   const sortSel = root.querySelector<HTMLSelectElement>("[data-sort]")!;
   const levelBtns = [...root.querySelectorAll<HTMLButtonElement>("button[data-f-level]")];
   const catBtns = [...root.querySelectorAll<HTMLButtonElement>("button[data-f-cat]")];
+  const priceBtns = [...root.querySelectorAll<HTMLButtonElement>("button[data-f-price]")];
+  const priceNote = root.querySelector<HTMLElement>("[data-price-note]");
+  const band = new Map(priceBtns.map((b) => [b.dataset.fPrice!, [Number(b.dataset.lo), b.dataset.hi ? Number(b.dataset.hi) : Infinity] as const]));
   const countEl = root.querySelector<HTMLElement>("[data-count]")!;
   const emptyEl = root.querySelector<HTMLElement>("[data-empty]")!;
 
@@ -42,27 +45,31 @@ function init(root: HTMLElement) {
   const knownL = new Set(levelBtns.map((b) => b.dataset.fLevel!)), knownC = new Set(catBtns.map((b) => b.dataset.fCat!));
   (sp.get("list") ?? "").split(",").filter((x) => knownL.has(x)).forEach((x) => f.levels.add(x));
   (sp.get("category") ?? "").split(",").filter((x) => knownC.has(x)).forEach((x) => f.cats.add(x));
+  (sp.get("price") ?? "").split(",").filter((x) => band.has(x)).forEach((x) => f.prices.add(x));
   f.q = (sp.get("q") ?? "").trim().toLowerCase(); qInput.value = sp.get("q") ?? "";
   if (["recent", "score"].includes(sp.get("sort") ?? "")) f.sort = sp.get("sort")!;
   sortSel.value = f.sort;
   levelBtns.forEach((b) => b.setAttribute("aria-pressed", String(f.levels.has(b.dataset.fLevel!))));
   catBtns.forEach((b) => b.setAttribute("aria-pressed", String(f.cats.has(b.dataset.fCat!))));
+  priceBtns.forEach((b) => b.setAttribute("aria-pressed", String(f.prices.has(b.dataset.fPrice!))));
 
   function writeUrl() {
     const u = new URL(location.href);
     const set = (k: string, v: string) => (v ? u.searchParams.set(k, v) : u.searchParams.delete(k));
-    set("list", [...f.levels].join(",")); set("category", [...f.cats].join(","));
+    set("list", [...f.levels].join(",")); set("category", [...f.cats].join(",")); set("price", [...f.prices].join(","));
     set("q", qInput.value.trim()); set("sort", f.sort === "score" || f.sort === "dist" ? "" : f.sort);
     set("view", root.classList.contains("show-map") ? "map" : "");
     history.replaceState(null, "", u);
   }
 
+  const inBand = (p: number) => Number.isFinite(p) && [...f.prices].some((k) => { const [lo, hi] = band.get(k)!; return p >= lo && p < hi; });
   function apply() {
     let n = 0;
     for (const el of rows) {
       const rec = byId.get(el.dataset.id!)!;
       const ok = (!f.levels.size || f.levels.has(el.dataset.level!))
         && (!f.cats.size || el.dataset.cats!.split("|").some((c) => f.cats.has(c)))
+        && (!f.prices.size || inBand(Number(el.dataset.price || NaN)))
         && (!f.q || el.dataset.hay!.includes(f.q));
       const inView = !f.bounds || !api || rec.pts.some((p) => api!.contains([p[0], p[1]]));
       el.hidden = !(ok && inView);
@@ -70,19 +77,21 @@ function init(root: HTMLElement) {
       if (!el.hidden) n++;
     }
     countEl.textContent = String(n);
+    if (priceNote) priceNote.hidden = !f.prices.size;
     emptyEl.hidden = n > 0;
     draw();
   }
-  levelBtns.concat(catBtns).forEach((b) => b.addEventListener("click", () => {
-    const set = b.dataset.fLevel ? f.levels : f.cats; const k = (b.dataset.fLevel ?? b.dataset.fCat)!;
+  levelBtns.concat(catBtns, priceBtns).forEach((b) => b.addEventListener("click", () => {
+    const set = b.dataset.fLevel ? f.levels : b.dataset.fCat ? f.cats : f.prices;
+    const k = (b.dataset.fLevel ?? b.dataset.fCat ?? b.dataset.fPrice)!;
     set.has(k) ? set.delete(k) : set.add(k);
     b.setAttribute("aria-pressed", String(set.has(k)));
     apply(); writeUrl();
   }));
   qInput.addEventListener("input", () => { f.q = qInput.value.trim().toLowerCase(); apply(); writeUrl(); });
   root.querySelector("[data-clear]")?.addEventListener("click", () => {
-    f.levels.clear(); f.cats.clear(); f.q = ""; qInput.value = "";
-    levelBtns.concat(catBtns).forEach((b) => b.setAttribute("aria-pressed", "false"));
+    f.levels.clear(); f.cats.clear(); f.prices.clear(); f.q = ""; qInput.value = "";
+    levelBtns.concat(catBtns, priceBtns).forEach((b) => b.setAttribute("aria-pressed", "false"));
     const bx = root.querySelector<HTMLInputElement>("[data-bounds]"); if (bx) { bx.checked = false; f.bounds = false; }
     apply(); writeUrl();
   });
@@ -102,7 +111,7 @@ function init(root: HTMLElement) {
     const s = [...rows].sort((a, b) => {
       if (f.sort === "dist") return distOf(a.dataset.id!) - distOf(b.dataset.id!);
       if (f.sort === "recent") return (b.dataset.visited ?? "").localeCompare(a.dataset.visited ?? "") || Number(a.dataset.i) - Number(b.dataset.i);
-      return Number(a.dataset.i) - Number(b.dataset.i); // 构建时已按 实吃→待吃→关店 + 分数 排好
+      return Number(a.dataset.i) - Number(b.dataset.i); // 构建时已按 星级 → 待吃 → 关店 排好
     });
     s.forEach((el) => listEl.appendChild(el));
   }
@@ -118,7 +127,7 @@ function init(root: HTMLElement) {
       });
       api?.me(me);
       then?.();
-    }, () => { alert("没拿到定位权限，换回按分数排序"); f.sort = "score"; sortSel.value = "score"; sort(); }, { timeout: 8000 });
+    }, () => { alert("没拿到定位权限，换回按星级排序"); f.sort = "score"; sortSel.value = "score"; sort(); }, { timeout: 8000 });
   }
   sortSel.addEventListener("change", () => {
     f.sort = sortSel.value;
@@ -177,48 +186,64 @@ function init(root: HTMLElement) {
   }
 
   const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-  const LABEL: Record<string, string> = { wubiChi: "务必吃", yingChiBang: "应吃榜", keyiChi: "可以吃", daiChi: "待吃", closed: "已关店" };
+  const LABEL: Record<string, string> = { s3: "★★★ 值得专程", s2: "★★ 值得绕路", s1: "★ 同类里出色", bib: "必吃登", sel: "星选", tbd: "待定级", daiChi: "待吃", closed: "已关店" };
 
   function popupEl(id: string, pt: Pt): HTMLElement {
     const row = rowById.get(id)!; const rec = byId.get(id)!;
-    const img = row.querySelector("img")?.getAttribute("src");
+    const imgEl = row.querySelector("img"); const img = imgEl?.getAttribute("src"); const pos = imgEl?.style.objectPosition || "50% 50%";
     const name = row.querySelector(".it-name")?.firstChild?.textContent?.trim() ?? "";
     const branch = rec.pts.length > 1 && pt[2] ? ` · ${pt[2]}` : (row.querySelector(".it-branch")?.textContent ?? "");
     const href = row.querySelector<HTMLAnchorElement>(".it-name")?.getAttribute("href") ?? "#";
-    const line = [rec.score != null ? `${rec.score}/10` : "", LABEL[rec.level] ?? "", row.querySelector(".it-price")?.textContent ?? ""].filter(Boolean).join(" · ");
+    const line = [LABEL[rec.level] ?? "", row.querySelector(".it-price")?.textContent ?? ""].filter(Boolean).join(" · ");
     const box = document.createElement("div");
     box.className = "pop";
-    box.innerHTML = (img ? `<img class="pop-img" src="${esc(img)}" alt="">` : `<span class="pop-img"></span>`)
+    box.innerHTML = (img ? `<img class="pop-img" src="${esc(img)}" style="object-position:${esc(pos)}" alt="">` : `<span class="pop-img"></span>`)
       + `<div><b>${esc(name)}${esc(branch)}</b><span class="pop-line">${esc(line)}</span>`
       + `<span class="pop-act"><a class="pop-nav" href="${esc(pt[3])}" target="_blank" rel="noopener noreferrer">导航</a><a class="pop-detail" href="${esc(href)}">详情</a></span></div>`;
     return box;
   }
 
-  /** 画点：挨得太近（屏幕 < 34px）的聚合成数字圆；选中店的点始终单独显示 */
+  const RANK: Record<string, number> = { s3: 0, s2: 1, s1: 2, bib: 3, sel: 4, tbd: 5, daiChi: 6, closed: 7 };
+  const RING: Record<string, string> = { s3: "var(--star)", s2: "var(--star)", s1: "var(--star)", bib: "var(--bib)", sel: "var(--ink-2)", tbd: "var(--ink-3)", daiChi: "#d98a1f", closed: "var(--line)" };
+  const STAR = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.95 6.2 6.8.8-5.05 4.65 1.35 6.75L12 17.2l-6.05 3.4 1.35-6.75L2.25 9.2l6.8-.8z"/></svg>`;
+  const NSTAR: Record<string, number> = { s3: 3, s2: 2, s1: 1 };
+  const FORK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M5 3v5M9 3v5M17 21V3c-2 1-3 4-3 8h3"/></svg>`;
+  const NAME_ZOOM = 15; // 街道级起气泡旁带店名
+
+  /** 画点：店 = 带尖角分数气泡；屏幕上挨太近的聚合成「N 家」圆（环色 = 组内最高档）；选中店始终单独显示 */
   function draw() {
     if (!api) return;
     api.clear();
     // 「只看地图范围内」只影响列表，地图仍显示所有符合筛选的点，方便拖动寻找
     const show = new Set(rows.filter((el) => el.dataset.match !== "").map((el) => el.dataset.id!));
     const pins = recs.filter((r) => show.has(r.id)).flatMap((r) => r.pts.map((p) => ({ r, p, xy: api!.project([p[0], p[1]]) })));
+    const named = api.zoom() >= NAME_ZOOM;
+    const R = named ? 60 : 44; // 带店名时气泡更宽，聚合半径相应放大
     const used = new Set<number>();
     pins.forEach((a, i) => {
       if (used.has(i)) return;
       const group = [a];
       if (a.r.id !== activeId) pins.forEach((b, j) => {
         if (j <= i || used.has(j) || b.r.id === activeId) return;
-        if (Math.hypot(a.xy.x - b.xy.x, a.xy.y - b.xy.y) < 34) { group.push(b); used.add(j); }
+        if (Math.hypot(a.xy.x - b.xy.x, a.xy.y - b.xy.y) < R) { group.push(b); used.add(j); }
       });
       if (group.length > 1) {
-        api!.add([a.p[0], a.p[1]], { html: `<div class="cluster">${group.length}</div>`, z: 50,
-          onClick: () => api!.fit(group.map((g) => [g.p[0], g.p[1]] as LngLat)) });
+        const best = group.map((g) => g.r.level).sort((x, y) => RANK[x] - RANK[y])[0];
+        const d = Math.min(52, 36 + group.length * 2);
+        const names = group.map((g) => g.r.name).join("、");
+        api!.add([a.p[0], a.p[1]], {
+          html: `<div class="ck" style="--ring:${RING[best]};--d:${d}px" title="${esc(names)}"><b>${group.length}</b><small>家</small></div>`, z: 50,
+          onClick: () => api!.fit(group.map((g) => [g.p[0], g.p[1]] as LngLat)),
+        });
         return;
       }
       const on = a.r.id === activeId;
-      const label = a.r.score != null ? String(a.r.score) : a.r.level === "daiChi" ? "待" : "·";
+      const lv = a.r.level;
+      const label = NSTAR[lv] ? `<span class="mk-st">${STAR.repeat(NSTAR[lv])}</span>` : lv === "bib" ? `<i class="mk-bib"></i>` : lv === "daiChi" ? "待吃" : FORK;
+      const nm = a.r.pts.length > 1 && a.p[2] ? `${a.r.name}·${a.p[2]}` : a.r.name;
       api!.add([a.p[0], a.p[1]], {
-        html: `<div class="pin pin--${a.r.level}${on ? " is-on" : ""}" title="${esc(a.p[2] || "")}">${label}</div>`,
-        z: on ? 1000 : a.r.level === "wubiChi" ? 30 : 0,
+        html: `<div class="mk mk--${lv}${on ? " is-on" : ""}${named ? " with-name" : ""}" title="${esc(nm)}">${label}<span class="mk-n">${esc(nm)}</span></div>`,
+        z: on ? 1000 : 60 - RANK[lv] * 8,
         onClick: () => select(a.r.id, "map", a.p),
         onHover: hoverable ? () => { highlight(a.r.id); } : undefined,
       });

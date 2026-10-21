@@ -9,7 +9,7 @@ export interface PubRestaurant {
   brand: string; branch: string | null; category: string | null; cuisineTags: string[];
   reviewText: string; dishes: PubDish[];
   score10: number | null; scoreScope: "restaurant" | "none";
-  recommendationLevel: "wubiChi" | "yingChiBang" | "keyiChi" | "daiChi";
+  recommendationLevel: GuideLevel; // 星其林级别（字段名沿用旧称）
   visitedAt: string | null; visitedAtPrecision: "day" | "month" | null;
   inRecent: boolean; multiShop: boolean; amapQuery: string;
   lng: number | null; lat: number | null; coordSystem: string | null; poiConfidence: string | null;
@@ -20,7 +20,7 @@ export interface PubRestaurant {
   contentUpdatedAt: string; coverImage: string | null;
   images: PubImage[];        // 实拍图（第 1 张为封面）；路径不含 base
 }
-export interface PubImage { src: string; thumb: string; w: number; h: number }
+export interface PubImage { src: string; thumb: string; w: number; h: number; pos: string } // pos：裁切焦点 object-position
 export interface PubBranch {
   id: string; name: string; address: string;
   lng: number | null; lat: number | null;
@@ -45,23 +45,27 @@ export const byRegion = (slug: string) => restaurants.filter((r) => r.regionSlug
 export const eatenByRegion = (slug: string) => byRegion(slug).filter(isEaten);
 export const waitByRegion = (slug: string) => byRegion(slug).filter((r) => r.recommendationLevel === "daiChi");
 
-/** 推荐用语只允许这四个（DEVELOPMENT-PLAN §1） */
-export const LEVEL_LABEL: Record<PubRestaurant["recommendationLevel"], string> = {
-  wubiChi: "务必吃",
-  yingChiBang: "应吃榜",
-  keyiChi: "可以吃",
-  daiChi: "待吃",
+/**
+ * 「星其林」（用户 2026-10-21 选定，取代 三榜 + 十分制）：参考米其林，不打分，只回答「值不值得为它跑一趟」。
+ * s3 值得专程 / s2 值得绕路 / s1 同类里出色 / bib 必吃登（好吃又便宜、能常去）/ sel 入选（路过可吃）/ tbd 待定级 / daiChi 待吃
+ */
+export type GuideLevel = "s3" | "s2" | "s1" | "bib" | "sel" | "tbd" | "daiChi";
+export const GUIDE_ORDER: GuideLevel[] = ["s3", "s2", "s1", "bib", "sel", "tbd", "daiChi"];
+export const LEVEL_LABEL: Record<GuideLevel, string> = {
+  s3: "三星", s2: "二星", s1: "一星", bib: "必吃登", sel: "星选", tbd: "待定级", daiChi: "待吃",
 };
+export const LEVEL_MEANING: Record<GuideLevel, string> = {
+  s3: "值得专程", s2: "值得绕路", s1: "同类里出色", bib: "人均 ¥80 以内，好吃不贵", sel: "星其林入选，路过可以吃", tbd: "还没定级", daiChi: "计划吃，还没吃",
+};
+export const starCount = (l: GuideLevel) => (l === "s3" ? 3 : l === "s2" ? 2 : l === "s1" ? 1 : 0);
 
-/** 实吃档（本人实吃记录，用于「本人实吃」计数，排除待吃） */
-export const EATEN_LEVELS = ["wubiChi", "yingChiBang", "keyiChi"] as const;
+/** 实吃 = 非待吃 */
 export const isEaten = (r: PubRestaurant) => r.recommendationLevel !== "daiChi";
 
 /** 推荐榜单一律排除关店店（关店不进任何推荐块，只在地区页置灰置底） */
 const open = (r: PubRestaurant) => !r.closed;
 export const recentEats = restaurants.filter((r) => r.inRecent && open(r));
-export const mustEats = restaurants.filter((r) => r.recommendationLevel === "wubiChi" && open(r));
-export const topList = restaurants.filter((r) => r.recommendationLevel === "yingChiBang" && open(r));
+export const guideList = (l: GuideLevel) => restaurants.filter((r) => r.recommendationLevel === l && open(r));
 export const waitList = restaurants.filter((r) => r.recommendationLevel === "daiChi" && open(r));
 
 /** 展示日期：月精度展示 YYYY.MM，不伪造具体日 */
@@ -72,12 +76,6 @@ export function fmtVisited(r: PubRestaurant): string | null {
     return `${y}.${m}`;
   }
   return r.visitedAt.replaceAll("-", ".");
-}
-
-/** 评分展示：x.x/10；无分不显示（缺评分不显示分数） */
-export function fmtScore(score: number | null): string | null {
-  if (score === null) return null;
-  return `${Number.isInteger(score) ? score.toFixed(0) : score.toFixed(1)}/10`;
 }
 
 /** 导航外链按地区分供应商：国内→高德，海外(日本/新加坡/泰国)→Google 地图（用户 2026-09-16） */
