@@ -186,7 +186,7 @@ function init(root: HTMLElement) {
   }
 
   const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-  const LABEL: Record<string, string> = { s3: "★★★ 值得专程", s2: "★★ 值得绕路", s1: "★ 同类里出色", bib: "必吃登", sel: "星选", tbd: "待定级", daiChi: "待吃", closed: "已关店" };
+  const LABEL: Record<string, string> = { s3: "★★★ 值得专程", s2: "★★ 值得绕路", s1: "★ 同类里出色", bib: "星推介", sel: "星选", tbd: "待定级", daiChi: "待吃", closed: "已关店" };
 
   function popupEl(id: string, pt: Pt): HTMLElement {
     const row = rowById.get(id)!; const rec = byId.get(id)!;

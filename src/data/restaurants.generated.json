@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T06:01:21.087Z",
+  "generatedAt": "2026-10-21T06:08:24.426Z",
   "policyVersion": "2026-09-16",
   "recentWindowDays": 120,
   "source": "food-sheet",
@@ -138,7 +138,7 @@
           "thumb": "images/r/r_c9ac0556/cover-400.webp",
           "w": 1200,
           "h": 1600,
-          "pos": "50% 50%"
+          "pos": "46% 30%"
         },
         {
           "src": "images/r/r_c9ac0556/p1.webp",
@@ -504,6 +504,13 @@
           "w": 1600,
           "h": 1200,
           "pos": "50% 50%"
+        },
+        {
+          "src": "images/r/r_bc8fb461/p3.webp",
+          "thumb": "images/r/r_bc8fb461/p3-400.webp",
+          "w": 1200,
+          "h": 1600,
+          "pos": "50% 50%"
         }
       ],
       "coverImage": "images/r/r_bc8fb461/cover.webp"
@@ -636,20 +643,6 @@
           "src": "images/r/r_77d9fb73/p2.webp",
           "thumb": "images/r/r_77d9fb73/p2-400.webp",
           "w": 1200,
-          "h": 1600,
-          "pos": "50% 50%"
-        },
-        {
-          "src": "images/r/r_77d9fb73/p4.webp",
-          "thumb": "images/r/r_77d9fb73/p4-400.webp",
-          "w": 1600,
-          "h": 1600,
-          "pos": "50% 50%"
-        },
-        {
-          "src": "images/r/r_77d9fb73/p5.webp",
-          "thumb": "images/r/r_77d9fb73/p5-400.webp",
-          "w": 1600,
           "h": 1600,
           "pos": "50% 50%"
         }
@@ -1207,13 +1200,6 @@
           "thumb": "images/r/r_5149c8ec/p1-400.webp",
           "w": 1600,
           "h": 1200,
-          "pos": "50% 50%"
-        },
-        {
-          "src": "images/r/r_5149c8ec/p2.webp",
-          "thumb": "images/r/r_5149c8ec/p2-400.webp",
-          "w": 1200,
-          "h": 1600,
           "pos": "50% 50%"
         }
       ],

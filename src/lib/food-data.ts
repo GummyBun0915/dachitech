@@ -47,12 +47,12 @@ export const waitByRegion = (slug: string) => byRegion(slug).filter((r) => r.rec
 
 /**
  * 「星其林」（用户 2026-10-21 选定，取代 三榜 + 十分制）：参考米其林，不打分，只回答「值不值得为它跑一趟」。
- * s3 值得专程 / s2 值得绕路 / s1 同类里出色 / bib 必吃登（好吃又便宜、能常去）/ sel 入选（路过可吃）/ tbd 待定级 / daiChi 待吃
+ * s3 值得专程 / s2 值得绕路 / s1 同类里出色 / bib 星推介（好吃又便宜、能常去）/ sel 入选（路过可吃）/ tbd 待定级 / daiChi 待吃
  */
 export type GuideLevel = "s3" | "s2" | "s1" | "bib" | "sel" | "tbd" | "daiChi";
 export const GUIDE_ORDER: GuideLevel[] = ["s3", "s2", "s1", "bib", "sel", "tbd", "daiChi"];
 export const LEVEL_LABEL: Record<GuideLevel, string> = {
-  s3: "三星", s2: "二星", s1: "一星", bib: "必吃登", sel: "星选", tbd: "待定级", daiChi: "待吃",
+  s3: "三星", s2: "二星", s1: "一星", bib: "星推介", sel: "星选", tbd: "待定级", daiChi: "待吃",
 };
 export const LEVEL_MEANING: Record<GuideLevel, string> = {
   s3: "值得专程", s2: "值得绕路", s1: "同类里出色", bib: "人均 ¥80 以内，好吃不贵", sel: "星其林入选，路过可以吃", tbd: "还没定级", daiChi: "计划吃，还没吃",

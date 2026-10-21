@@ -8,7 +8,7 @@ import {
 } from "../lib/food-data";
 
 const updated = lastUpdated();
-// 星其林（用户 2026-10-21）：星级店按 三星 → 二星 → 一星 一栏；必吃登单独一栏
+// 星其林（用户 2026-10-21）：星级店按 三星 → 二星 → 一星 一栏；星推介单独一栏
 const starred = [...guideList("s3"), ...guideList("s2"), ...guideList("s1")];
 const bibs = guideList("bib");
 const eaten = restaurants.filter(isEaten);
@@ -59,7 +59,7 @@ const latest = [...eaten].sort((a, b) => b.contentUpdatedAt.localeCompare(a.cont
 
   {bibs.length > 0 && (
     <section class="page page-inner block">
-      <h2 class="section-title">必吃登推介 <span class="block-sub">人均 ¥80 以内，好吃不贵，常去不腻</span></h2>
+      <h2 class="section-title">星推介 <span class="block-sub">人均 ¥80 以内，好吃不贵，常去不腻</span></h2>
       <div class="card-grid">{bibs.map((r) => <RestaurantCard r={r} variant="album" />)}</div>
     </section>
   )}
