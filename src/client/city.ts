@@ -156,7 +156,9 @@ function init(root: HTMLElement) {
       return (loading = Promise.resolve(null));
     }
     showMsg(`<span>地图加载中…</span>`);
-    loading = (cfg.provider === "amap" ? createAmap(mapEl, cfg.amap!.key, cfg.amap!.security) : createOsm(mapEl))
+    const first = allPts();
+    const center: LngLat = [first.reduce((a, p) => a + p[0], 0) / first.length, first.reduce((a, p) => a + p[1], 0) / first.length];
+    loading = (cfg.provider === "amap" ? createAmap(mapEl, cfg.amap!.key, cfg.amap!.security, center) : createOsm(mapEl))
       .then((m) => {
         api = m; msgEl.hidden = true;
         m.on("zoomend", draw);

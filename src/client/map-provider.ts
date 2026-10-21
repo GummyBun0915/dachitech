@@ -34,14 +34,15 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
-export async function createAmap(el: HTMLElement, key: string, security: string): Promise<MapApi> {
+export async function createAmap(el: HTMLElement, key: string, security: string, center: LngLat): Promise<MapApi> {
   if (!window.AMap) {
     window._AMapSecurityConfig = { securityJsCode: security };
     await loadScript(`https://webapi.amap.com/maps?v=2.0&key=${encodeURIComponent(key)}`);
   }
   const AMap = window.AMap;
   if (!AMap) throw new Error("AMap 未就绪");
-  const map = new AMap.Map(el, { zoom: 12, resizeEnable: true, viewMode: "2D" });
+  // 必须给 center：不给时高德会异步按 IP 定位城市中心，把我们随后设的视野覆盖掉
+  const map = new AMap.Map(el, { zoom: 12, center, resizeEnable: true, viewMode: "2D" });
   // 不等底图 complete：首屏瓦片在手机上可能 >8s，等待会把「其实能用的地图」误判为失败；点位与交互不依赖瓦片
   let markers: any[] = [];
   const info = new AMap.InfoWindow({ isCustom: true, autoMove: true, anchor: "bottom-center", offset: new AMap.Pixel(0, -16) });
